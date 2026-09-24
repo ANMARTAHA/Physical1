@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Study Smart — States of Matter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F6F8FC;
+  --bg-panel:#EEF2F9;
+  --bg-card:#FFFFFF;
+  --bg-card-hover:#E8EEF8;
+  --border:#D5DDEC;
+  --border-soft:#E3E9F4;
+  --text:#14213D;
+  --text-dim:#4B5A7A;
+  --text-faint:#6B7896;
+  --on-accent:#FFFFFF;
+  --solid:#2563EB;
+  --liquid:#0F766E;
+  --gas:#C2410C;
+  --gold:#B45309;
+  --purple:#7C3AED;
+  --danger:#DC2626;
+  --good:#16A34A;
+  --radius:14px;
+  --shadow: 0 10px 30px rgba(20,33,61,0.08);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:
+    radial-gradient(circle at 15% 0%, rgba(37,99,235,0.07), transparent 40%),
+    radial-gradient(circle at 85% 10%, rgba(194,65,12,0.05), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(15,118,110,0.05), transparent 50%),
+    var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+  line-height:1.5;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 80px;}
+
+/* ---------- HEADER ---------- */
+header.top{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;
+  padding-bottom:22px;margin-bottom:24px;
+  border-bottom:1px solid var(--border-soft);
+}
+.brand{display:flex;align-items:center;gap:14px;}
+.brand-mark{
+  width:46px;height:46px;border-radius:12px;position:relative;flex:none;
+  background:linear-gradient(145deg,var(--bg-card),var(--bg-panel));
+  border:1px solid var(--border);
+  overflow:hidden;
+}
+.brand-mark .p{position:absolute;border-radius:50%;}
+.brand-mark .p1{width:6px;height:6px;background:var(--solid);top:6px;left:6px;}
+.brand-mark .p2{width:6px;height:6px;background:var(--solid);top:6px;left:16px;}
+.brand-mark .p3{width:6px;height:6px;background:var(--liquid);bottom:9px;left:9px;animation:drift 3s ease-in-out infinite;}
+.brand-mark .p4{width:6px;height:6px;background:var(--liquid);bottom:9px;left:22px;animation:drift 3s ease-in-out infinite .4s;}
+.brand-mark .p5{width:5px;height:5px;background:var(--gas);top:14px;right:6px;animation:float 2.4s ease-in-out infinite;}
+.brand-mark .p6{width:5px;height:5px;background:var(--gas);bottom:6px;right:9px;animation:float 2.4s ease-in-out infinite .6s;}
+@keyframes drift{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(2px,-4px)}}
+.brand h1{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.5rem;margin:0;font-weight:700;letter-spacing:-0.01em;
+}
+.brand h1 span{color:var(--gold);}
+.brand p{margin:2px 0 0;color:var(--text-dim);font-size:0.82rem;letter-spacing:.02em;}
+.tag{
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text-faint);
+  border:1px solid var(--border);padding:4px 10px;border-radius:99px;white-space:nowrap;
+}
+
+/* ---------- NAV TABS ---------- */
+nav.tabs{
+  display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px;
+}
+nav.tabs button{
+  font-family:'Space Grotesk',sans-serif;
+  background:var(--bg-panel);border:1px solid var(--border);
+  color:var(--text-dim);padding:10px 16px;border-radius:10px;
+  font-size:.85rem;font-weight:600;cursor:pointer;letter-spacing:.01em;
+  display:flex;align-items:center;gap:8px;
+  transition:all .15s ease;
+}
+nav.tabs button .dot{width:7px;height:7px;border-radius:50%;background:var(--text-faint);transition:background .15s;}
+nav.tabs button:hover{color:var(--text);border-color:var(--border);background:var(--bg-card);}
+nav.tabs button.active{color:var(--on-accent);background:var(--gold);border-color:var(--gold);}
+nav.tabs button.active .dot{background:var(--on-accent);}
+
+section.panel{display:none;animation:fadein .25s ease;}
+section.panel.active{display:block;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+h2.panel-title{
+  font-family:'Space Grotesk',sans-serif;font-size:1.35rem;margin:0 0 4px;font-weight:700;
+}
+p.panel-sub{color:var(--text-dim);font-size:.9rem;margin:0 0 22px;max-width:640px;}
+
+/* ---------- OVERVIEW ---------- */
+.grid-overview{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;
+}
+.ov-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:18px 18px 16px;position:relative;overflow:hidden;
+}
+.ov-card::before{
+  content:"";position:absolute;top:0;left:0;width:100%;height:3px;
+}
+.ov-card.solid::before{background:var(--solid);}
+.ov-card.liquid::before{background:var(--liquid);}
+.ov-card.gas::before{background:var(--gas);}
+.ov-card.imf::before{background:var(--gold);}
+.ov-card.laws::before{background:var(--purple);}
+.ov-card h3{
+  font-family:'Space Grotesk',sans-serif;margin:2px 0 10px;font-size:1rem;
+  display:flex;align-items:center;gap:8px;
+}
+.ov-card ul{margin:0;padding-left:18px;font-size:.85rem;color:var(--text-dim);}
+.ov-card ul li{margin-bottom:5px;}
+.ov-card ul li b{color:var(--text);font-weight:600;}
+.formula-box{
+  font-family:'JetBrains Mono',monospace;background:var(--bg-panel);
+  border:1px solid var(--border-soft);border-radius:8px;
+  padding:8px 10px;margin:8px 0;font-size:.82rem;color:var(--gold);
+  display:inline-block;
+}
+
+/* ---------- DIAGRAMS ---------- */
+.diag-grid{display:grid;grid-template-columns:1fr;gap:20px;}
+.diag-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px;
+}
+.diag-card h3{font-family:'Space Grotesk',sans-serif;margin:0 0 4px;font-size:1.02rem;}
+.diag-card .hint{color:var(--text-dim);font-size:.82rem;margin:0 0 16px;}
+
+/* phase state switcher */
+.phase-switch{display:flex;gap:8px;margin-bottom:16px;}
+.phase-switch button{
+  flex:1;padding:9px;border-radius:9px;border:1px solid var(--border);
+  background:var(--bg-panel);color:var(--text-dim);font-weight:600;cursor:pointer;
+  font-family:'Space Grotesk',sans-serif;font-size:.82rem;transition:all .15s;
+}
+.phase-switch button.active[data-p="solid"]{background:rgba(37,99,235,.10);border-color:var(--solid);color:var(--solid);}
+.phase-switch button.active[data-p="liquid"]{background:rgba(15,118,110,.10);border-color:var(--liquid);color:var(--liquid);}
+.phase-switch button.active[data-p="gas"]{background:rgba(194,65,12,.10);border-color:var(--gas);color:var(--gas);}
+
+.stage{
+  height:220px;border-radius:10px;background:var(--bg-panel);border:1px solid var(--border-soft);
+  position:relative;overflow:hidden;
+}
+.particle{
+  position:absolute;width:14px;height:14px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #fff, var(--solid) 60%);
+  box-shadow:0 0 6px rgba(37,99,235,.35);
+}
+.phase-info{display:flex;gap:18px;margin-top:14px;flex-wrap:wrap;font-size:.8rem;color:var(--text-dim);}
+.phase-info b{color:var(--text);}
+
+/* gas law sliders */
+.law-row{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;}
+.law-controls{flex:1;min-width:220px;}
+.slider-block{margin-bottom:16px;}
+.slider-block label{display:flex;justify-content:space-between;font-size:.82rem;color:var(--text-dim);margin-bottom:6px;}
+.slider-block label span{color:var(--gold);font-family:'JetBrains Mono',monospace;}
+input[type=range]{width:100%;accent-color:var(--gold);}
+.law-visual{flex:1;min-width:240px;}
+#pvCanvas{width:100%;height:220px;background:var(--bg-panel);border:1px solid var(--border-soft);border-radius:10px;}
+.readout{
+  font-family:'JetBrains Mono',monospace;font-size:.85rem;background:var(--bg-panel);
+  border:1px solid var(--border-soft);border-radius:8px;padding:10px 12px;color:var(--gold);margin-top:10px;
+}
+
+/* energy curve diagram */
+.energy-wrap{display:flex;gap:20px;flex-wrap:wrap;align-items:center;}
+#energyCanvas{width:100%;max-width:420px;height:220px;background:var(--bg-panel);border:1px solid var(--border-soft);border-radius:10px;}
+.energy-legend{font-size:.82rem;color:var(--text-dim);flex:1;min-width:200px;}
+.energy-legend div{margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.swatch{width:10px;height:10px;border-radius:3px;flex:none;}
+
+/* IMF table */
+table.imf{width:100%;border-collapse:collapse;font-size:.85rem;}
+table.imf th,table.imf td{padding:9px 10px;border-bottom:1px solid var(--border-soft);text-align:left;}
+table.imf th{color:var(--text-dim);font-weight:600;font-family:'Space Grotesk',sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;}
+table.imf tr:hover td{background:var(--bg-card-hover);}
+
+/* ---------- MINI MAP ---------- */
+.map-layout{display:grid;grid-template-columns:280px 1fr;gap:18px;}
+@media(max-width:760px){.map-layout{grid-template-columns:1fr;}}
+.map-nodes{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px;display:flex;flex-direction:column;gap:6px;
+}
+.map-nodes .grp-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-faint);margin:10px 0 4px;}
+.map-nodes .grp-label:first-child{margin-top:0;}
+.map-node{
+  text-align:left;background:transparent;border:1px solid transparent;color:var(--text-dim);
+  padding:9px 10px;border-radius:8px;cursor:pointer;font-size:.86rem;font-family:'Inter',sans-serif;
+  display:flex;align-items:center;gap:8px;transition:all .15s;
+}
+.map-node .b{width:6px;height:6px;border-radius:50%;background:var(--text-faint);flex:none;}
+.map-node:hover{background:var(--bg-card-hover);color:var(--text);}
+.map-node.on{background:rgba(180,83,9,.09);border-color:var(--gold);color:var(--gold);}
+.map-node.on .b{background:var(--gold);}
+.map-display{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:26px;min-height:340px;display:flex;flex-direction:column;justify-content:center;
+}
+.map-display .placeholder{color:var(--text-faint);text-align:center;font-size:.9rem;}
+.map-display h4{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;margin:0 0 12px;color:var(--gold);}
+.map-display p{color:var(--text);font-size:.92rem;margin:0 0 10px;}
+.map-display .formula-box{margin-top:6px;}
+
+/* ---------- FLASHCARDS ---------- */
+.fc-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
+.fc-progress{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--text-dim);}
+.fc-btns{display:flex;gap:8px;}
+.fc-btns button{
+  background:var(--bg-panel);border:1px solid var(--border);color:var(--text);
+  padding:8px 14px;border-radius:8px;cursor:pointer;font-size:.82rem;font-weight:600;
+  font-family:'Space Grotesk',sans-serif;
+}
+.fc-btns button:hover{background:var(--bg-card-hover);}
+.fc-btns button.gold{background:var(--gold);color:var(--on-accent);border-color:var(--gold);}
+.flashcard-stage{display:flex;justify-content:center;margin-bottom:16px;}
+.flashcard{
+  width:100%;max-width:520px;height:260px;perspective:1200px;cursor:pointer;
+}
+.flashcard-inner{
+  position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;
+}
+.flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+.fc-face{
+  position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:28px;border:1px solid var(--border);
+}
+.fc-front{background:linear-gradient(150deg,var(--bg-card),var(--bg-panel));}
+.fc-back{background:linear-gradient(150deg,#EEF3FF,#FFFFFF);transform:rotateY(180deg);}
+.fc-face .lbl{position:absolute;top:14px;left:16px;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em;}
+.fc-face .content{font-family:'Space Grotesk',sans-serif;font-size:1.08rem;font-weight:500;line-height:1.5;}
+.fc-back .content{font-family:'Inter',sans-serif;font-weight:400;font-size:.98rem;color:var(--text);}
+.fc-tap{position:absolute;bottom:14px;right:16px;font-size:.68rem;color:var(--text-faint);}
+.fc-deck-note{text-align:center;color:var(--text-faint);font-size:.78rem;margin-top:4px;}
+
+/* ---------- QUIZ ---------- */
+.quiz-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;}
+.quiz-score{
+  font-family:'JetBrains Mono',monospace;font-size:.85rem;background:var(--bg-panel);
+  border:1px solid var(--border-soft);padding:8px 14px;border-radius:8px;color:var(--gold);
+}
+.quiz-list{display:flex;flex-direction:column;gap:14px;}
+.q-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+.q-card .q-head{display:flex;gap:10px;margin-bottom:12px;}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--gold);flex:none;padding-top:2px;}
+.q-text{font-size:.92rem;font-weight:500;}
+.q-opts{display:flex;flex-direction:column;gap:8px;margin-left:28px;}
+.q-opt{
+  display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;
+  border:1px solid var(--border-soft);background:var(--bg-panel);cursor:pointer;font-size:.86rem;
+  transition:all .12s;
+}
+.q-opt:hover{background:var(--bg-card-hover);}
+.q-opt .mark{width:16px;height:16px;border-radius:50%;border:2px solid var(--text-faint);flex:none;}
+.q-opt.correct{border-color:var(--good);background:rgba(22,163,74,.10);}
+.q-opt.correct .mark{background:var(--good);border-color:var(--good);}
+.q-opt.wrong{border-color:var(--danger);background:rgba(220,38,38,.08);}
+.q-opt.wrong .mark{background:var(--danger);border-color:var(--danger);}
+.q-opt.disabled{cursor:default;}
+.quiz-footer{display:flex;justify-content:center;margin-top:22px;}
+.quiz-footer button{
+  background:var(--gold);color:var(--on-accent);border:none;padding:12px 26px;border-radius:10px;
+  font-weight:700;font-family:'Space Grotesk',sans-serif;cursor:pointer;font-size:.9rem;
+}
+
+/* ---------- LEVEL SELECTOR (Flashcards + Quiz) ---------- */
+.level-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+.level-tabs button{
+  font-family:'Space Grotesk',sans-serif;
+  background:var(--bg-panel);border:1px solid var(--border);
+  color:var(--text-dim);padding:9px 15px;border-radius:10px;
+  font-size:.8rem;font-weight:600;cursor:pointer;letter-spacing:.01em;
+  display:flex;align-items:center;gap:7px;transition:all .15s ease;
+}
+.level-tabs button .lvl-dot{width:7px;height:7px;border-radius:50%;background:var(--text-faint);transition:background .15s;}
+.level-tabs button:hover{color:var(--text);border-color:var(--border);background:var(--bg-card);}
+.level-tabs button.active{color:var(--on-accent);background:var(--gold);border-color:var(--gold);}
+.level-tabs button.active .lvl-dot{background:var(--on-accent);}
+.level-tabs button[data-level="2"].active{background:var(--liquid);border-color:var(--liquid);}
+.level-tabs button[data-level="3"].active{background:var(--gas);border-color:var(--gas);}
+
+
+/* ---------- CREDITS (top bar + footer) ---------- */
+.credit-bar{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:10px;
+  padding:9px 14px;margin-bottom:20px;font-size:.8rem;color:var(--text-dim);
+}
+.credit-bar b,footer .credit b{color:var(--text);}
+.social{display:flex;gap:8px;flex-wrap:wrap;}
+.social a{
+  display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:99px;
+  border:1px solid var(--border);background:var(--bg-panel);color:var(--text);
+  text-decoration:none;font-weight:600;font-size:.78rem;transition:background .15s,border-color .15s;
+}
+.social a:hover{background:var(--bg-card-hover);border-color:var(--gold);}
+.social svg{flex:none;}
+footer{
+  margin-top:50px;padding-top:20px;border-top:1px solid var(--border-soft);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+  color:var(--text-faint);font-size:.78rem;
+}
+footer .credit{display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:var(--text-dim);}
+
+button:focus-visible,summary:focus-visible,a:focus-visible,.search:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+
+/* ---------- TOPICS ---------- */
+.sec-h{font-family:'Space Grotesk',sans-serif;font-size:1.08rem;font-weight:700;margin:28px 0 10px;}
+.sec-h:first-of-type{margin-top:0;}
+.tool-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px;}
+.tool-row button{
+  background:var(--bg-card);border:1px solid var(--border);color:var(--text);
+  padding:7px 13px;border-radius:8px;cursor:pointer;font-size:.8rem;font-weight:600;
+  font-family:'Space Grotesk',sans-serif;
+}
+.tool-row button:hover{background:var(--bg-card-hover);}
+.search{
+  width:100%;max-width:360px;padding:9px 12px;border-radius:9px;border:1px solid var(--border);
+  background:var(--bg-card);color:var(--text);font-family:'Inter',sans-serif;font-size:.86rem;
+}
+.term-count{font-size:.78rem;color:var(--text-faint);font-family:'JetBrains Mono',monospace;}
+
+details.topic{
+  --accent:var(--gold);
+  background:var(--bg-card);border:1px solid var(--border);border-left:4px solid var(--accent);
+  border-radius:12px;margin-bottom:10px;
+}
+details.topic.solid{--accent:var(--solid);}
+details.topic.liquid{--accent:var(--liquid);}
+details.topic.gas{--accent:var(--gas);}
+details.topic.laws{--accent:var(--purple);}
+details.topic summary{
+  cursor:pointer;list-style:none;padding:14px 16px;display:flex;align-items:center;gap:10px;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;
+}
+details.topic summary::-webkit-details-marker{display:none;}
+details.topic summary::after{content:"▾";margin-left:auto;color:var(--text-faint);transition:transform .2s;}
+details.topic[open] summary::after{transform:rotate(180deg);}
+.t-count{font-family:'Inter',sans-serif;font-weight:500;font-size:.75rem;color:var(--text-faint);}
+.sub-list{margin:0;padding:0 18px 14px 38px;font-size:.88rem;}
+.sub-list > li{margin-bottom:8px;}
+.s-title{font-weight:600;}
+.s-note{display:block;color:var(--text-dim);font-size:.8rem;margin-top:1px;}
+.kid-list{margin:4px 0 0;padding-left:18px;color:var(--text-dim);font-size:.84rem;}
+
+.term-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.term-card{
+  --accent:var(--gold);
+  background:var(--bg-card);border:1px solid var(--border);border-top:3px solid var(--accent);
+  border-radius:12px;padding:12px 16px 14px;
+}
+.term-card.k-matter{--accent:var(--solid);}
+.term-card.k-phase{--accent:var(--liquid);}
+.term-card.k-gas{--accent:var(--gas);}
+.term-card.k-kinetic{--accent:var(--purple);}
+.term-card .grp{font-size:.72rem;color:var(--text-faint);}
+.term-card h4{font-family:'Space Grotesk',sans-serif;margin:2px 0 4px;font-size:.98rem;}
+.term-card p{margin:0;font-size:.84rem;color:var(--text-dim);}
+.term-empty{color:var(--text-faint);font-size:.88rem;}
+
+/* ---------- HIGH YIELD ---------- */
+.hy-block{margin-bottom:28px;}
+.hy-block h3{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;margin:0 0 4px;}
+.hy-block .hint{color:var(--text-dim);font-size:.82rem;margin:0 0 12px;}
+.star-list{list-style:none;margin:0;padding:0;display:grid;gap:8px;}
+.star-list li{
+  background:var(--bg-card);border:1px solid var(--border);border-left:4px solid var(--gold);
+  border-radius:10px;padding:10px 14px;font-size:.88rem;
+}
+.star-list li b{color:var(--text);}
+.tbl-wrap{overflow-x:auto;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:6px 8px;}
+.tbl-wrap table.imf{min-width:520px;}
+.tbl-wrap table.imf td:first-child{font-weight:600;}
+.hy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;}
+.hy-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;}
+.hy-card h4{font-family:'Space Grotesk',sans-serif;margin:0 0 6px;font-size:.95rem;}
+.hy-card p{margin:6px 0 0;font-size:.84rem;color:var(--text-dim);}
+.hy-card .result{margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:.86rem;font-weight:700;color:var(--gold);}
+.hy-card ol{margin:0;padding-left:18px;font-size:.85rem;color:var(--text-dim);}
+.hy-card ol li{margin-bottom:6px;}
+.trap-list{list-style:none;margin:0;padding:0;display:grid;gap:8px;}
+.trap-list li{
+  background:var(--bg-card);border:1px solid var(--border);border-left:4px solid var(--danger);
+  border-radius:10px;padding:10px 14px;font-size:.87rem;
+}
+.trap-list li b{color:var(--text);}
+
+@media (max-width:600px){
+  .brand h1{font-size:1.25rem;}
+  .law-row,.energy-wrap{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="credit-bar">
+    <span>© <b>Anmar Taha</b>. All rights reserved.</span>
+    <div class="social">
+        <a href="https://t.me/AnmarTaha" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M21 4 3 11l6 2m12-9-8 16-4-7m12-9L9 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>Telegram @AnmarTaha</a>
+        <a href="https://instagram.com/a.za18" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>Instagram a.za18</a>
+      </div>
+  </div>
+
+  <header class="top">
+    <div class="brand">
+      <div class="brand-mark">
+        <div class="p p1"></div><div class="p p2"></div>
+        <div class="p p3"></div><div class="p p4"></div>
+        <div class="p p5"></div><div class="p p6"></div>
+      </div>
+      <div>
+        <h1>Study <span>Smart</span></h1>
+        <p>Physical Pharmacy · States of Matter</p>
+      </div>
+    </div>
+    <div class="tag">solid → liquid → gas</div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="overview"><span class="dot"></span>Overview</button>
+    <button class="tab-btn" data-tab="topics"><span class="dot"></span>Topics</button>
+    <button class="tab-btn" data-tab="highyield"><span class="dot"></span>High Yield</button>
+    <button class="tab-btn" data-tab="diagrams"><span class="dot"></span>Diagrams</button>
+    <button class="tab-btn" data-tab="minimap"><span class="dot"></span>Mini Map</button>
+    <button class="tab-btn" data-tab="flashcards"><span class="dot"></span>Flashcards</button>
+    <button class="tab-btn" data-tab="quiz"><span class="dot"></span>Quiz Bank</button>
+  </nav>
+
+  <!-- ============ 1. OVERVIEW ============ -->
+  <section class="panel active" id="overview">
+    <h2 class="panel-title">Overview</h2>
+    <p class="panel-sub">Just the essentials — definitions, distinguishing properties, and the laws you need, no lecture filler.</p>
+
+    <div class="grid-overview">
+      <div class="ov-card solid">
+        <h3>🧊 Solid</h3>
+        <ul>
+          <li>Particles <b>tightly packed</b>, fixed positions — only vibrate.</li>
+          <li><b>Fixed shape & volume.</b> Very hard to compress.</li>
+          <li><b>Lowest</b> rate of diffusion.</li>
+          <li>e.g. ice, sugar, rock, wood.</li>
+        </ul>
+      </div>
+      <div class="ov-card liquid">
+        <h3>💧 Liquid</h3>
+        <ul>
+          <li>Particles less tightly packed than solids; can flow.</li>
+          <li><b>Fixed volume, no fixed shape</b> — takes container's shape.</li>
+          <li>Hard to compress; diffusion faster than solids.</li>
+          <li>e.g. water, milk, blood, coffee.</li>
+        </ul>
+      </div>
+      <div class="ov-card gas">
+        <h3>💨 Gas</h3>
+        <ul>
+          <li>Particles far apart, <b>negligible attraction</b>, move freely.</li>
+          <li><b>No fixed shape or volume.</b> Highest compressibility.</li>
+          <li>Highest diffusion rate & kinetic energy.</li>
+          <li>e.g. air, He, N₂, O₂, CO₂.</li>
+        </ul>
+      </div>
+      <div class="ov-card imf">
+        <h3>🔗 Binding Forces</h3>
+        <ul>
+          <li><b>Intramolecular</b> = bonds holding atoms together in a molecule (covalent).</li>
+          <li><b>Intermolecular</b> = attraction/repulsion between molecules (needed for gas/liquid/solid aggregates).</li>
+          <li><b>Van der Waals</b> = weak, distance-dependent, nonionic but involve charge fluctuations.</li>
+          <li><b>Hydrogen bond</b> = H attracted to strongly electronegative F, O, N — explains water's high dielectric constant, low vapor pressure, high boiling point.</li>
+        </ul>
+      </div>
+      <div class="ov-card laws">
+        <h3>📐 Gas Laws</h3>
+        <div class="formula-box">Boyle's: PV = k (const T)</div><br>
+        <div class="formula-box">Charles': V = kT (const P)</div><br>
+        <div class="formula-box">Combined: P₁V₁/T₁ = P₂V₂/T₂</div><br>
+        <div class="formula-box">Ideal gas: PV = nRT</div><br>
+        <div class="formula-box">M = gRT / PV</div>
+        <ul style="margin-top:10px;">
+          <li>R = 0.08205 L·atm/mol·K (or 8.314 J/mol·K)</li>
+          <li>0 °C = 273.15 K · 1 atm = 760 mmHg</li>
+        </ul>
+      </div>
+      <div class="ov-card" style="--accentColor:#7C3AED;">
+        <h3>🌫️ Transitions</h3>
+        <ul>
+          <li><b>Sublimation</b>: solid → gas directly (iodine, camphor).</li>
+          <li><b>Deposition</b>: gas → solid directly (reverse of sublimation).</li>
+          <li>Heating a solid → atoms gain energy → disrupt lattice → liquid → eventually gas.</li>
+          <li><b>Real gas</b> ≈ ideal gas at <b>high T, low P</b> (particles have volume & interact in a real gas; ideal gas particles have no volume & no interactions).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TOPICS ============ -->
+  <section class="panel" id="topics">
+    <h2 class="panel-title">Topics</h2>
+    <p class="panel-sub">Every main heading and sub-heading of the lecture in order, then each term the lecture defines.</p>
+
+    <h3 class="sec-h">Lecture outline</h3>
+    <div class="tool-row">
+      <button id="topicExpand">Expand all</button>
+      <button id="topicCollapse">Collapse all</button>
+    </div>
+    <div id="topicOutline"></div>
+
+    <h3 class="sec-h">Defined terms</h3>
+    <div class="tool-row">
+      <label class="sr-only" for="termSearch">Search terms</label>
+      <input type="search" id="termSearch" class="search" placeholder="Search a term or definition">
+      <span class="term-count" id="termCount"></span>
+    </div>
+    <div class="term-grid" id="termGrid"></div>
+  </section>
+
+  <!-- ============ HIGH YIELD ============ -->
+  <section class="panel" id="highyield">
+    <h2 class="panel-title">High Yield</h2>
+    <p class="panel-sub">The facts the lecture stresses most, grouped so you can review them fast.</p>
+
+    <div class="hy-block">
+      <h3>Top facts</h3>
+      <p class="hint">If time is short, start here.</p>
+      <ul class="star-list">
+        <li><b>Matter</b> = anything that takes up space and can be weighed (it has volume and mass). <b>Pressure and temperature</b> separate its states.</li>
+        <li><b>Solid</b>: fixed shape and volume, particles only vibrate. <b>Liquid</b>: fixed volume, no fixed shape. <b>Gas</b>: neither fixed, highest compressibility, diffusion and kinetic energy.</li>
+        <li><b>Intermolecular forces</b> must exist for molecules to form aggregates in gases, liquids and solids.</li>
+        <li><b>Van der Waals</b> forces are weak, nonionic, distance-dependent and arise from transient shifts in electron density.</li>
+        <li><b>Hydrogen bond</b> = H with a strongly electronegative F, O or N. It explains water's high dielectric constant, low vapor pressure and high boiling point.</li>
+        <li><b>Sublimation</b> (iodine, camphor) = solid → gas without melting. <b>Deposition</b> is the reverse.</li>
+        <li><b>Boyle</b>: PV = k (constant T). <b>Charles / Gay-Lussac</b>: V = kT (constant P). <b>Combined</b>: P₁V₁/T₁ = P₂V₂/T₂. <b>Ideal gas</b>: PV = nRT.</li>
+        <li><b>Real gases</b> behave like ideal gases at <b>high temperature and low pressure</b>.</li>
+      </ul>
+    </div>
+
+    <div class="hy-block">
+      <h3>Solid vs liquid vs gas</h3>
+      <div class="tbl-wrap">
+        <table class="imf">
+          <thead><tr><th>Property</th><th>Solid</th><th>Liquid</th><th>Gas</th></tr></thead>
+          <tbody>
+            <tr><td>Particle packing</td><td>Tightly, closely packed</td><td>Less tightly packed than solids</td><td>Far apart</td></tr>
+            <tr><td>Particle motion</td><td>Vibrate about a mean position only</td><td>Can flow</td><td>Move freely</td></tr>
+            <tr><td>Shape</td><td>Fixed</td><td>Takes the container's shape</td><td>Not fixed</td></tr>
+            <tr><td>Volume</td><td>Fixed</td><td>Fixed</td><td>Not fixed</td></tr>
+            <tr><td>Compressibility</td><td>Tough to compress</td><td>Difficult to compress</td><td>Highest</td></tr>
+            <tr><td>Diffusion rate</td><td>Very low</td><td>Higher than solids</td><td>Higher than solids and liquids</td></tr>
+            <tr><td>Attraction between particles</td><td>Strongest of the three</td><td>Weaker than solids</td><td>Negligible</td></tr>
+            <tr><td>Kinetic energy</td><td>Lower than gas</td><td>Lower than gas</td><td>Higher than solids and liquids</td></tr>
+            <tr><td>Examples</td><td>Ice, sugar, rock, wood</td><td>Water, milk, blood, coffee</td><td>Air, He, N₂, O₂, CO₂</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="hy-block">
+      <h3>Pairs that get mixed up</h3>
+      <div class="tbl-wrap">
+        <table class="imf">
+          <thead><tr><th>Pair</th><th>First</th><th>Second</th></tr></thead>
+          <tbody>
+            <tr><td>Intermolecular vs intramolecular</td><td>Inter: attractive and repulsive forces between molecules</td><td>Intra: chemical bonds holding atoms together inside a molecule</td></tr>
+            <tr><td>Cohesion vs adhesion</td><td>Cohesion: attraction of like molecules</td><td>Adhesion: attraction of unlike molecules</td></tr>
+            <tr><td>Sublimation vs deposition</td><td>Sublimation: solid → gas directly</td><td>Deposition: gas → solid directly (the reverse)</td></tr>
+            <tr><td>Boyle vs Charles</td><td>Boyle: constant T, P ∝ 1/V, PV = k</td><td>Charles / Gay-Lussac: constant P, V ∝ T, V = kT</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="hy-block">
+      <h3>Numbers and constants</h3>
+      <div class="tbl-wrap">
+        <table class="imf">
+          <thead><tr><th>Quantity</th><th>Value</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td>Pressure</td><td>1 atm = 760 mmHg</td><td>Also expressed in dynes/cm²</td></tr>
+            <tr><td>Volume</td><td>1 cm³ = 1 mL</td><td>Usually in liters or cm³</td></tr>
+            <tr><td>Temperature</td><td>0 °C = 273.15 K</td><td>Gas equations use the Kelvin scale; the lecture examples round to 273</td></tr>
+            <tr><td>R (pressure in atm)</td><td>0.08205 L·atm/mol·K</td><td>The lecture also writes ≈ 0.083; the ethyl alcohol example uses 0.082</td></tr>
+            <tr><td>R (pressure in dynes/cm²)</td><td>8.314 J/mol·K</td><td>As the lecture pairs them</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="hy-block">
+      <h3>Formulas</h3>
+      <div class="hy-grid">
+        <div class="hy-card"><h4>Boyle's law</h4><div class="formula-box">PV = k</div><p>Fixed mass of gas, constant temperature.</p></div>
+        <div class="hy-card"><h4>Charles / Gay-Lussac</h4><div class="formula-box">V = kT</div><p>Fixed mass of gas, constant pressure, T in Kelvin.</p></div>
+        <div class="hy-card"><h4>Combined gas law</h4><div class="formula-box">P₁V₁/T₁ = P₂V₂/T₂</div><p>Find a new P, V or T when conditions change.</p></div>
+        <div class="hy-card"><h4>Ideal gas equation</h4><div class="formula-box">PV = nRT</div><p>n moles of gas. For 1 mole: PV = RT.</p></div>
+        <div class="hy-card"><h4>Molecular weight</h4><div class="formula-box">M = gRT / PV</div><p>From n = g/M, where g is grams of gas.</p></div>
+      </div>
+    </div>
+
+    <div class="hy-block">
+      <h3>Worked examples: know the answers</h3>
+      <div class="hy-grid">
+        <div class="hy-card">
+          <h4>Ethyl nitrite spirit (combined gas law)</h4>
+          <p>30.0 mL at 20 °C and 740 mmHg. Find the volume at 0 °C and 760 mmHg.</p>
+          <div class="formula-box">740×30.0 / (273+20) = 760×V₂ / 273</div>
+          <div class="result">V₂ = 27.2 mL</div>
+        </div>
+        <div class="hy-card">
+          <h4>2 moles of an ideal gas</h4>
+          <p>Volume at 25 °C (298 K) and 780 mmHg.</p>
+          <div class="formula-box">(780/760)×V = 2×0.08205×298</div>
+          <div class="result">V = 47.65 liters</div>
+        </div>
+        <div class="hy-card">
+          <h4>Ethyl alcohol vapor (molecular weight)</h4>
+          <p>0.30 g occupies 200 mL at 1 atm and 100 °C (373 K).</p>
+          <div class="formula-box">M = 0.30×0.082×373 / (1×0.2)</div>
+          <div class="result">M = 46.0 g/mole</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hy-block">
+      <h3>Kinetic molecular theory and real vs ideal gas</h3>
+      <div class="hy-grid">
+        <div class="hy-card">
+          <h4>The four postulates</h4>
+          <ol>
+            <li>Gas particle volume is negligible compared with the space they fill (low P, high T).</li>
+            <li>Particles do not attract one another and move independently (low P).</li>
+            <li>Particles are in continuous random motion because of their kinetic energy.</li>
+            <li>Collisions are perfectly elastic: no net loss of speed or energy.</li>
+          </ol>
+        </div>
+        <div class="hy-card" style="padding:6px 8px;">
+          <div class="tbl-wrap" style="border:none;padding:0;">
+            <table class="imf" style="min-width:0;">
+              <thead><tr><th></th><th>Real gas</th><th>Ideal gas</th></tr></thead>
+              <tbody>
+                <tr><td>Particle volume</td><td>Has volume</td><td>None</td></tr>
+                <tr><td>Collisions</td><td>Energy lost</td><td>Elastic</td></tr>
+                <tr><td>Interactions</td><td>Intermolecular forces</td><td>None</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="padding:0 10px 8px;">Real gases behave like ideal gases at high temperature and low pressure.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hy-block">
+      <h3>Common traps</h3>
+      <ul class="trap-list">
+        <li><b>Kelvin, always.</b> Convert °C to K before using any gas equation.</li>
+        <li><b>Match R to the pressure unit.</b> With R = 0.08205 L·atm/mol·K, divide mmHg by 760 to get atm.</li>
+        <li><b>Liquids keep their volume, gases do not.</b> Liquid: fixed volume, no fixed shape. Gas: neither.</li>
+        <li><b>Van der Waals is nonionic</b> yet still involves charge–charge interactions.</li>
+        <li><b>Hydrogen bonds need F, O or N</b> on the electronegative side.</li>
+        <li><b>Direction matters.</b> Sublimation is solid → gas; deposition is gas → solid.</li>
+        <li><b>Boyle needs constant T; Charles needs constant P.</b></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 2. DIAGRAMS ============ -->
+  <section class="panel" id="diagrams">
+    <h2 class="panel-title">Interactive Diagrams</h2>
+    <p class="panel-sub">Every figure, chart and table from the lecture — but you can click, drag and switch them.</p>
+
+    <div class="diag-grid">
+
+      <!-- Particle phase switcher -->
+      <div class="diag-card">
+        <h3>Particle Arrangement by Phase</h3>
+        <p class="hint">Tap a state to watch how particle packing and motion change.</p>
+        <div class="phase-switch">
+          <button data-p="solid" class="active">Solid</button>
+          <button data-p="liquid">Liquid</button>
+          <button data-p="gas">Gas</button>
+        </div>
+        <div class="stage" id="stage"></div>
+        <div class="phase-info" id="phaseInfo"></div>
+      </div>
+
+      <!-- Boyle's / Combined gas law simulator -->
+      <div class="diag-card">
+        <h3>Boyle's Law Simulator — P₁V₁/T₁ = P₂V₂/T₂</h3>
+        <p class="hint">Drag the sliders to change conditions and see the resulting volume plotted live.</p>
+        <div class="law-row">
+          <div class="law-controls">
+            <div class="slider-block">
+              <label>P₁ (mmHg) <span id="p1v">740</span></label>
+              <input type="range" id="p1" min="600" max="900" value="740">
+            </div>
+            <div class="slider-block">
+              <label>V₁ (mL) <span id="v1v">30.0</span></label>
+              <input type="range" id="v1" min="10" max="60" value="30" step="0.5">
+            </div>
+            <div class="slider-block">
+              <label>T₁ (K) <span id="t1v">293</span></label>
+              <input type="range" id="t1" min="250" max="350" value="293">
+            </div>
+            <div class="slider-block">
+              <label>P₂ (mmHg) <span id="p2v">760</span></label>
+              <input type="range" id="p2" min="600" max="900" value="760">
+            </div>
+            <div class="slider-block">
+              <label>T₂ (K) <span id="t2v">273</span></label>
+              <input type="range" id="t2" min="250" max="350" value="273">
+            </div>
+            <div class="readout" id="pvReadout">V₂ = 27.20 mL</div>
+          </div>
+          <div class="law-visual">
+            <canvas id="pvCanvas" width="400" height="220"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Intermolecular energy curve -->
+      <div class="diag-card">
+        <h3>Net Intermolecular Energy vs Distance</h3>
+        <p class="hint">Hover the curve to see how attraction and repulsion balance at the equilibrium distance rₑ.</p>
+        <div class="energy-wrap">
+          <canvas id="energyCanvas" width="420" height="220"></canvas>
+          <div class="energy-legend">
+            <div><span class="swatch" style="background:#DC2626"></span> Repulsion dominates at short range (particles pushed apart)</div>
+            <div><span class="swatch" style="background:#16A34A"></span> Attraction dominates at mid range (Van der Waals / H-bond pull)</div>
+            <div><span class="swatch" style="background:#B45309"></span> rₑ — equilibrium distance, net energy minimum</div>
+            <div id="energyReadout" style="color:var(--gold);font-family:'JetBrains Mono',monospace;margin-top:10px;">move mouse over the curve →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMF comparison table -->
+      <div class="diag-card">
+        <h3>Intermolecular Forces at a Glance</h3>
+        <p class="hint">Sortable-style reference — click a row to highlight it.</p>
+        <table class="imf" id="imfTable">
+          <thead><tr><th>Force</th><th>Relative strength</th><th>Nature</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Intramolecular (covalent)</td><td>Strongest</td><td>Chemical bond within a molecule</td><td>O–H bond in water</td></tr>
+            <tr><td>Hydrogen bond</td><td>Strong</td><td>H attracted to F, O, or N of another molecule</td><td>H₂O···H₂O</td></tr>
+            <tr><td>Van der Waals</td><td>Weak, distance-dependent</td><td>Fluctuating charge–charge interaction</td><td>Noble gas liquefaction</td></tr>
+            <tr><td>Cohesion</td><td>Variable</td><td>Attraction between like molecules</td><td>Water molecules to each other</td></tr>
+            <tr><td>Adhesion</td><td>Variable</td><td>Attraction between unlike molecules</td><td>Water wetting glass</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 3. MINI MAP ============ -->
+  <section class="panel" id="minimap">
+    <h2 class="panel-title">Mini Map</h2>
+    <p class="panel-sub">Click any topic on the left — its explanation appears right here, in the display pane.</p>
+
+    <div class="map-layout">
+      <div class="map-nodes" id="mapNodes"></div>
+      <div class="map-display" id="mapDisplay">
+        <p class="placeholder">Select a topic on the left to see it explained here.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. FLASHCARDS ============ -->
+  <section class="panel" id="flashcards">
+    <h2 class="panel-title">Flashcards</h2>
+    <p class="panel-sub">Tap a card to flip it. Pick a difficulty level — every level covers all the definitions, laws and facts in the lecture, at increasing depth.</p>
+
+    <div class="level-tabs" id="fcLevelTabs">
+      <button class="active" data-level="1"><span class="lvl-dot"></span>Level 1 · Easy (60)</button>
+      <button data-level="2"><span class="lvl-dot"></span>Level 2 · Medium (50)</button>
+      <button data-level="3"><span class="lvl-dot"></span>Level 3 · Hard (40)</button>
+    </div>
+
+    <div class="fc-toolbar">
+      <div class="fc-progress" id="fcProgress">Card 1 / 20</div>
+      <div class="fc-btns">
+        <button id="fcShuffle">🔀 Shuffle</button>
+        <button id="fcPrev">← Prev</button>
+        <button id="fcNext" class="gold">Next →</button>
+      </div>
+    </div>
+
+    <div class="flashcard-stage">
+      <div class="flashcard" id="flashcard">
+        <div class="flashcard-inner">
+          <div class="fc-face fc-front">
+            <span class="lbl">Term</span>
+            <div class="content" id="fcFront"></div>
+            <span class="fc-tap">tap to flip</span>
+          </div>
+          <div class="fc-face fc-back">
+            <span class="lbl">Answer</span>
+            <div class="content" id="fcBack"></div>
+            <span class="fc-tap">tap to flip back</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="fc-deck-note" id="fcDeckNote">Deck of 60 cards (Level 1 · Easy), built from every definition and formula in the lecture.</p>
+  </section>
+
+  <!-- ============ 5. QUIZ BANK ============ -->
+  <section class="panel" id="quiz">
+    <h2 class="panel-title">Quiz Bank</h2>
+    <p class="panel-sub" id="quizPanelSub">Pick a difficulty level. Level 1 · Easy has 60 questions. Answer choices are shuffled every time you load or restart.</p>
+
+    <div class="level-tabs" id="quizLevelTabs">
+      <button class="active" data-level="1"><span class="lvl-dot"></span>Level 1 · Easy (60)</button>
+      <button data-level="2"><span class="lvl-dot"></span>Level 2 · Medium (50)</button>
+      <button data-level="3"><span class="lvl-dot"></span>Level 3 · Hard (40)</button>
+    </div>
+
+    <div class="quiz-toolbar">
+      <div class="quiz-score" id="quizScore">Score: 0 / 0</div>
+      <div class="fc-btns"><button id="quizRestart">🔁 Restart & Reshuffle</button></div>
+    </div>
+
+    <div class="quiz-list" id="quizList"></div>
+
+    <div class="quiz-footer">
+      <button id="quizFinish">Show Final Score</button>
+    </div>
+  </section>
+
+  <footer>
+    <div>Study Smart — built for focused revision.</div>
+    <div class="credit">
+      <span>© <b>Anmar Taha</b>. All rights reserved.</span>
+      <div class="social">
+        <a href="https://t.me/AnmarTaha" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M21 4 3 11l6 2m12-9-8 16-4-7m12-9L9 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>Telegram @AnmarTaha</a>
+        <a href="https://instagram.com/a.za18" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>Instagram a.za18</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+/* ============ TAB NAVIGATION ============ */
+const tabBtns = document.querySelectorAll('.tab-btn');
+const panels = document.querySelectorAll('.panel');
+tabBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    tabBtns.forEach(b=>b.classList.remove('active'));
+    panels.forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    if(btn.dataset.tab==='diagrams' && typeof rebuildDiagramsOnShow==='function'){
+      rebuildDiagramsOnShow();
+    }
+  });
+});
+
+/* ============ DIAGRAM 1: PHASE PARTICLE STAGE ============ */
+const stage = document.getElementById('stage');
+const phaseInfo = document.getElementById('phaseInfo');
+const phaseData = {
+  solid:{count:24,color:'#2563EB',info:'<span><b>Packing:</b> tight lattice</span><span><b>Motion:</b> vibration only</span><span><b>Compressibility:</b> very low</span>'},
+  liquid:{count:18,color:'#0F766E',info:'<span><b>Packing:</b> close, disordered</span><span><b>Motion:</b> free flow, slower diffusion than gas</span><span><b>Compressibility:</b> low</span>'},
+  gas:{count:14,color:'#C2410C',info:'<span><b>Packing:</b> far apart</span><span><b>Motion:</b> fast, random, independent</span><span><b>Compressibility:</b> highest</span>'}
+};
+let currentPhase='solid';
+let animId;
+let particles=[];
+
+function buildParticles(phase){
+  stage.innerHTML='';
+  particles=[];
+  const d = phaseData[phase];
+  const W = stage.clientWidth, H = stage.clientHeight;
+  if(phase==='solid'){
+    const cols=6, rows=4, gapX=W/(cols+1), gapY=H/(rows+1);
+    for(let r=0;r<rows;r++){
+      for(let c=0;c<cols;c++){
+        const el=document.createElement('div');
+        el.className='particle';
+        el.style.background=`radial-gradient(circle at 30% 30%, #fff, ${d.color} 60%)`;
+        el.style.boxShadow=`0 0 8px ${d.color}88`;
+        const bx=(c+1)*gapX, by=(r+1)*gapY;
+        el.style.left=(bx-7)+'px'; el.style.top=(by-7)+'px';
+        stage.appendChild(el);
+        particles.push({el,bx,by,phase:'solid'});
+      }
+    }
+  } else {
+    for(let i=0;i<d.count;i++){
+      const el=document.createElement('div');
+      el.className='particle';
+      el.style.background=`radial-gradient(circle at 30% 30%, #fff, ${d.color} 60%)`;
+      el.style.boxShadow=`0 0 8px ${d.color}88`;
+      const x=Math.random()*(W-16), y=Math.random()*(H-16);
+      el.style.left=x+'px'; el.style.top=y+'px';
+      stage.appendChild(el);
+      const speed = phase==='gas' ? (1.6+Math.random()*2.2) : (0.4+Math.random()*0.5);
+      const angle = Math.random()*Math.PI*2;
+      particles.push({el,x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,phase});
+    }
+  }
+  phaseInfo.innerHTML = d.info;
+}
+
+function animate(){
+  const W = stage.clientWidth, H = stage.clientHeight;
+  if(currentPhase==='solid'){
+    const t=Date.now()/300;
+    particles.forEach((p,i)=>{
+      const jx = Math.sin(t+i)*1.4, jy=Math.cos(t*1.3+i)*1.4;
+      p.el.style.left=(p.bx-7+jx)+'px';
+      p.el.style.top=(p.by-7+jy)+'px';
+    });
+  } else {
+    particles.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>W-14) p.vx*=-1;
+      if(p.y<0||p.y>H-14) p.vy*=-1;
+      p.x=Math.max(0,Math.min(W-14,p.x));
+      p.y=Math.max(0,Math.min(H-14,p.y));
+      p.el.style.left=p.x+'px';
+      p.el.style.top=p.y+'px';
+    });
+  }
+  animId = requestAnimationFrame(animate);
+}
+
+document.querySelectorAll('.phase-switch button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.phase-switch button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentPhase = btn.dataset.p;
+    buildParticles(currentPhase);
+  });
+});
+buildParticles('solid');
+animate();
+
+/* ============ DIAGRAM 2: BOYLE / COMBINED GAS LAW ============ */
+const p1=document.getElementById('p1'), v1=document.getElementById('v1'), t1=document.getElementById('t1');
+const p2=document.getElementById('p2'), t2=document.getElementById('t2');
+const p1v=document.getElementById('p1v'), v1v=document.getElementById('v1v'), t1v=document.getElementById('t1v');
+const p2v=document.getElementById('p2v'), t2v=document.getElementById('t2v');
+const pvReadout=document.getElementById('pvReadout');
+const pvCanvas=document.getElementById('pvCanvas');
+const pvCtx=pvCanvas.getContext('2d');
+
+function drawPV(V1,V2){
+  const W=pvCanvas.width, H=pvCanvas.height;
+  pvCtx.clearRect(0,0,W,H);
+  pvCtx.fillStyle='#EEF2F9';
+  pvCtx.fillRect(0,0,W,H);
+  const maxV = Math.max(V1,V2,10)*1.3;
+  const barW = 70, gap=90, baseY=H-30;
+  function bar(x,val,color,label){
+    const h = (val/maxV)*(H-60);
+    pvCtx.fillStyle=color;
+    pvCtx.fillRect(x, baseY-h, barW, h);
+    pvCtx.fillStyle='#14213D';
+    pvCtx.font='12px Inter, sans-serif';
+    pvCtx.textAlign='center';
+    pvCtx.fillText(label, x+barW/2, baseY+18);
+    pvCtx.fillStyle='#B45309';
+    pvCtx.font='bold 13px JetBrains Mono, monospace';
+    pvCtx.fillText(val.toFixed(2)+' mL', x+barW/2, baseY-h-8);
+  }
+  bar(W/2-gap/2-barW, V1, '#2563EB', 'V₁');
+  bar(W/2+gap/2, V2, '#0F766E', 'V₂');
+  pvCtx.strokeStyle='#D5DDEC';
+  pvCtx.beginPath(); pvCtx.moveTo(0,baseY); pvCtx.lineTo(W,baseY); pvCtx.stroke();
+}
+
+function updatePV(){
+  const P1=+p1.value, V1=+v1.value, T1=+t1.value, P2=+p2.value, T2=+t2.value;
+  p1v.textContent=P1; v1v.textContent=V1.toFixed(1); t1v.textContent=T1; p2v.textContent=P2; t2v.textContent=T2;
+  const V2 = (P1*V1*T2)/(T1*P2);
+  pvReadout.textContent = `V₂ = ${V2.toFixed(2)} mL   (from P₁V₁/T₁ = P₂V₂/T₂)`;
+  drawPV(V1,V2);
+}
+[p1,v1,t1,p2,t2].forEach(inp=>inp.addEventListener('input',updatePV));
+updatePV();
+
+/* ============ DIAGRAM 3: ENERGY vs DISTANCE CURVE ============ */
+const eCanvas=document.getElementById('energyCanvas');
+const eCtx=eCanvas.getContext('2d');
+const energyReadout=document.getElementById('energyReadout');
+
+function drawEnergyCurve(){
+  const W=eCanvas.width,H=eCanvas.height;
+  eCtx.clearRect(0,0,W,H);
+  eCtx.fillStyle='#EEF2F9'; eCtx.fillRect(0,0,W,H);
+  const originX=60, originY=H/2;
+  eCtx.strokeStyle='#9AA6C0'; eCtx.lineWidth=1;
+  eCtx.beginPath(); eCtx.moveTo(originX,10); eCtx.lineTo(originX,H-10); eCtx.stroke();
+  eCtx.beginPath(); eCtx.moveTo(20,originY); eCtx.lineTo(W-10,originY); eCtx.stroke();
+  eCtx.fillStyle='#4B5A7A'; eCtx.font='11px Inter, sans-serif';
+  eCtx.fillText('Energy', originX-45, 20);
+  eCtx.fillText('Distance →', W-90, originY-8);
+
+  // Lennard-Jones-like curve
+  eCtx.beginPath();
+  eCtx.lineWidth=2.5;
+  eCtx.strokeStyle='#B45309';
+  let first=true;
+  const points=[];
+  for(let px=originX+8; px<W-15; px+=2){
+    const r = (px-originX)/40 + 0.55;
+    const y = 4*( (0.6/Math.pow(r,12)) - (0.6/Math.pow(r,6)) );
+    const cy = originY - y*140;
+    points.push({px,cy,r});
+    if(first){eCtx.moveTo(px,cy);first=false;} else eCtx.lineTo(px,cy);
+  }
+  eCtx.stroke();
+
+  // mark equilibrium (minimum)
+  let minPt=points[0];
+  points.forEach(pt=>{ if(pt.cy>minPt.cy) minPt=pt; });
+  eCtx.fillStyle='#B45309';
+  eCtx.beginPath(); eCtx.arc(minPt.px,minPt.cy,4,0,Math.PI*2); eCtx.fill();
+  eCtx.strokeStyle='#7B88A6'; eCtx.setLineDash([3,3]);
+  eCtx.beginPath(); eCtx.moveTo(minPt.px,minPt.cy); eCtx.lineTo(minPt.px,originY); eCtx.stroke();
+  eCtx.setLineDash([]);
+  eCtx.fillStyle='#B45309'; eCtx.font='12px JetBrains Mono, monospace';
+  eCtx.fillText('rₑ', minPt.px-6, originY+18);
+
+  eCanvas._points = points;
+}
+drawEnergyCurve();
+
+/* Diagrams tab starts hidden (display:none), so #stage reports 0x0 the first
+   time it's built. Re-run the layout-dependent pieces once the tab is actually shown. */
+function rebuildDiagramsOnShow(){
+  buildParticles(currentPhase);
+  drawEnergyCurve();
+}
+
+eCanvas.addEventListener('mousemove',(ev)=>{
+  const rect=eCanvas.getBoundingClientRect();
+  const scaleX = eCanvas.width/rect.width;
+  const mx = (ev.clientX-rect.left)*scaleX;
+  let closest=null,best=1e9;
+  (eCanvas._points||[]).forEach(pt=>{
+    const dist=Math.abs(pt.px-mx);
+    if(dist<best){best=dist;closest=pt;}
+  });
+  if(closest){
+    const zone = closest.cy > eCanvas.height/2 ? 'Attraction dominates (net negative energy)' : 'Repulsion dominates (net positive energy)';
+    energyReadout.textContent = zone;
+  }
+});
+
+/* ============ IMF TABLE ROW HIGHLIGHT ============ */
+document.querySelectorAll('#imfTable tbody tr').forEach(row=>{
+  row.style.cursor='pointer';
+  row.addEventListener('click',()=>{
+    document.querySelectorAll('#imfTable tbody tr').forEach(r=>r.style.background='');
+    row.style.background='var(--bg-card-hover)';
+  });
+});
+
+/* ============ MINI MAP ============ */
+const mapTopics = [
+  {group:'Matter Basics', items:[
+    {t:'What is Matter?', body:'Matter is anything that takes up space and can be weighed — it has volume and mass. In nature it exists as rigid solids, flowing liquids, or shapeless gases, depending on pressure and temperature.'},
+    {t:'Solid State', body:'Particles are tightly packed with tiny gaps, making solids hard to compress. Particles can only vibrate about a fixed mean position, giving a fixed shape and volume and a very low diffusion rate. Examples: solid ice, sugar, rock, wood.'},
+    {t:'Liquid State', body:'Particles are less tightly packed than in solids and can move, so liquids take the shape of their container while keeping a fixed volume. They are difficult to compress, diffuse faster than solids, and have weaker interparticle attraction. Examples: water, milk, blood, coffee.'},
+    {t:'Gas State', body:'Particles are far apart with negligible attractive force and move freely, so gases have neither fixed shape nor fixed volume. They are the most compressible state, diffuse fastest, and have the highest particle kinetic energy. Examples: air, helium, nitrogen, oxygen, carbon dioxide.'},
+  ]},
+  {group:'Binding Forces', items:[
+    {t:'Intermolecular vs Intramolecular', body:'Intramolecular forces are the chemical bonds holding atoms together inside a molecule (like covalent bonds). Intermolecular forces are the attractive/repulsive forces between molecules — these must exist for gases, liquids and solids to form aggregates at all.'},
+    {t:'Cohesion & Adhesion', body:'Cohesion is the attraction between like molecules (e.g., water molecules to each other). Adhesion is the attraction between unlike molecules (e.g., water to glass). Both are manifestations of intermolecular forces, balanced against repulsion for molecules to interact.'},
+    {t:'Van der Waals Forces', body:'Weak, nonionic but charge-dependent intermolecular forces. A transient shift in electron density around a nucleus creates a fluctuating dipole, which can induce a charge separation in a neighboring molecule — the resulting attraction is distance-dependent.'},
+    {t:'Hydrogen Bonds', body:'Formed when a hydrogen atom bonded to a strongly electronegative atom (F, O, or N) is attracted to another electronegative atom nearby. This electrostatic "hydrogen bridge" exists in ice and liquid water, explaining water’s high dielectric constant, low vapor pressure, and high boiling point.'},
+    {t:'Attraction–Repulsion Balance', body:'At short distances, repulsion dominates as electron clouds push apart; at longer distances, attractive forces (Van der Waals, hydrogen bonding) dominate. The net energy is lowest — most stable — at the equilibrium distance rₑ.'},
+  ]},
+  {group:'Phase Transitions', items:[
+    {t:'Melting → Vaporization Pathway', body:'As a solid is heated, atoms gain enough energy to disrupt the ordered lattice and become a liquid. With more energy, the liquid becomes a gas. Molecules, atoms and ions in the solid state are held close by intermolecular forces until this energy input breaks that order.'},
+    {t:'Sublimation & Deposition', body:'Solids with high vapor pressure (like iodine and camphor) can pass directly from solid to gas without melting — this is sublimation. The reverse process, gas condensing directly to a solid, is called deposition.'},
+  ]},
+  {group:'Gas Laws', items:[
+    {t:"Boyle's Law", body:"Relates the volume and pressure of a fixed mass of gas at constant temperature: P is proportional to 1/V, or PV = k. Increase pressure and volume drops proportionally, and vice versa."},
+    {t:'Law of Gay-Lussac & Charles', body:'States that the volume and absolute temperature of a fixed mass of gas at constant pressure are directly proportional: V ∝ T, or V = kT.'},
+    {t:'Combined Gas Law', body:'Combining Boyle’s and Charles’ laws gives P₁V₁/T₁ = P₂V₂/T₂ — useful for finding a new volume, pressure, or temperature when conditions change. Worked example: 30.0 mL at 740 mmHg and 20°C becomes 27.2 mL at 760 mmHg and 0°C.'},
+    {t:'Ideal Gas Equation', body:'PV/T is constant and equals R, the gas constant, so PV = RT for one mole, or PV = nRT for n moles. R = 0.08205 L·atm/mol·K when pressure is in atmospheres, or R = 8.314 J/mol·K when pressure is in dynes/cm².'},
+    {t:'Molecular Weight from Gas Law', body:'Replacing n with g/M (grams over molecular weight) in PV = nRT gives PV = (g/M)RT, rearranged to M = gRT/PV. Example: 0.30 g of ethyl alcohol vapor in 200 mL at 1 atm and 100°C gives M ≈ 46.0 g/mol.'},
+    {t:'Victor Meyer Method', body:'A practical method for determining molecular weight: the liquid is weighed in a glass bulb, vaporized, and its volume measured at a known temperature and barometric pressure. These values are substituted into the ideal gas equation to obtain the molecular weight.'},
+  ]},
+  {group:'Kinetic Theory', items:[
+    {t:'Kinetic Molecular Theory (4 postulates)', body:'1) Gas particle volume is negligible compared to the container (true at low P, high T). 2) Particles do not attract one another and move independently (low pressure). 3) Particles show continuous random motion from kinetic energy. 4) Collisions are perfectly elastic — no net energy or speed is lost.'},
+    {t:'Real Gas vs Ideal Gas', body:'Real gas particles have volume, lose some energy in collisions, and experience intermolecular forces. Ideal gas particles are assumed to have no volume, undergo perfectly elastic collisions, and have no interactions. Real gases behave most like ideal gases at high temperature and low pressure.'},
+  ]},
+];
+
+const mapNodesEl = document.getElementById('mapNodes');
+const mapDisplayEl = document.getElementById('mapDisplay');
+mapTopics.forEach(grp=>{
+  const label=document.createElement('div');
+  label.className='grp-label';
+  label.textContent=grp.group;
+  mapNodesEl.appendChild(label);
+  grp.items.forEach(item=>{
+    const btn=document.createElement('button');
+    btn.className='map-node';
+    btn.innerHTML=`<span class="b"></span>${item.t}`;
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.map-node').forEach(n=>n.classList.remove('on'));
+      btn.classList.add('on');
+      mapDisplayEl.innerHTML = `<h4>${item.t}</h4><p>${item.body}</p>`;
+    });
+    mapNodesEl.appendChild(btn);
+  });
+});
+
+/* ============ FLASHCARDS ============ */
+const flashDataL1 = [
+  {"f": "Definition of Matter", "b": "Anything that takes up space and can be weighed — it has both volume and mass."},
+  {"f": "Three basic states of matter", "b": "Solid, liquid, and gas."},
+  {"f": "Two external factors that change the state of matter", "b": "Pressure and temperature."},
+  {"f": "Example of a substance with a fixed shape", "b": "Wood or stone (rigid solids)."},
+  {"f": "Example of a substance that flows and takes the shape of its container", "b": "Water (a liquid)."},
+  {"f": "Example of matter with no definite shape or size", "b": "Air (a gas)."},
+  {"f": "Solid — particle packing", "b": "Particles are tightly/closely packed together."},
+  {"f": "Solid — compressibility", "b": "Very hard to compress; the gaps between particles are tiny."},
+  {"f": "Solid — shape and volume", "b": "Fixed shape and fixed volume."},
+  {"f": "Solid — particle movement", "b": "Particles can only vibrate about a fixed mean position; they cannot move freely."},
+  {"f": "Solid — diffusion rate", "b": "Very low rate of diffusion."},
+  {"f": "Examples of solids", "b": "Solid ice, sugar, rock, wood."},
+  {"f": "Liquid — particle packing", "b": "Less tightly packed than in solids."},
+  {"f": "Liquid — shape", "b": "Takes the shape of its container."},
+  {"f": "Liquid — compressibility", "b": "Difficult to compress; particles have little space to move into."},
+  {"f": "Liquid — shape and volume", "b": "Fixed volume but no fixed shape."},
+  {"f": "Liquid — diffusion rate", "b": "Higher rate of diffusion than solids."},
+  {"f": "Liquid — force of attraction", "b": "Weaker than in solids."},
+  {"f": "Examples of liquids", "b": "Water, milk, blood, coffee."},
+  {"f": "Gas — particle spacing", "b": "Particles are far apart from each other."},
+  {"f": "Gas — force of attraction", "b": "Negligible; particles move freely."},
+  {"f": "Gas — shape and volume", "b": "Neither fixed shape nor fixed volume."},
+  {"f": "Gas — compressibility", "b": "Highest compressibility of the three states."},
+  {"f": "Gas — diffusion rate", "b": "Higher than solids and liquids."},
+  {"f": "Gas — kinetic energy", "b": "Higher than in solids and liquids."},
+  {"f": "Examples of gases", "b": "Air, helium, nitrogen, oxygen, carbon dioxide."},
+  {"f": "Definition of intermolecular forces", "b": "Attractive and repulsive forces that arise between the molecules of a substance."},
+  {"f": "Definition of intramolecular forces", "b": "The chemical bonds holding atoms together within a molecule."},
+  {"f": "Why intermolecular forces matter", "b": "They must exist for molecules to exist as aggregates in gases, liquids, and solids."},
+  {"f": "Definition of cohesion", "b": "The attraction of like (similar) molecules."},
+  {"f": "Definition of adhesion", "b": "The attraction of unlike (different) molecules."},
+  {"f": "Definition of repulsion (intermolecular)", "b": "A reaction between two molecules that forces them apart."},
+  {"f": "Van der Waals forces — ionic character", "b": "Nonionic interactions between molecules, yet they involve charge–charge interactions."},
+  {"f": "Van der Waals forces — strength", "b": "Weak intermolecular forces that depend on the distance between atoms/molecules."},
+  {"f": "Van der Waals forces — origin", "b": "A transient shift in electron density creates a fluctuating dipole that can attract or repel a neighboring molecule."},
+  {"f": "Definition of a hydrogen bond", "b": "An electrostatic union between a hydrogen atom and a strongly electronegative atom (F, O, or N); also called a hydrogen bridge."},
+  {"f": "Why hydrogen can form this bond", "b": "Its small size and large electrostatic field let it move in close to an electronegative atom."},
+  {"f": "Where hydrogen bonds are found", "b": "In ice and in liquid water."},
+  {"f": "Water properties explained by hydrogen bonding", "b": "High dielectric constant, low vapor pressure, and high boiling point."},
+  {"f": "Three primary states/phases of matter", "b": "Gases, liquids, and crystalline solids."},
+  {"f": "What holds particles close in the solid state", "b": "Intermolecular forces."},
+  {"f": "What happens when a solid is heated", "b": "Atoms gain enough energy to disrupt the lattice and pass into the liquid form."},
+  {"f": "What happens when a liquid is heated further", "b": "The atoms/molecules pass into the gaseous state."},
+  {"f": "Definition of sublimation", "b": "A solid passing directly into the gaseous state without melting."},
+  {"f": "Examples of sublimation", "b": "Iodine and camphor (solids with high vapor pressure)."},
+  {"f": "Definition of deposition", "b": "The reverse of sublimation — condensation directly to the solid state."},
+  {"f": "Why gases exert pressure", "b": "Vigorous, rapid molecular motion causes collisions with each other and with the container walls."},
+  {"f": "Units of gas pressure", "b": "Dynes/cm², atmospheres, or millimeters of mercury."},
+  {"f": "Conversion between atm and mmHg", "b": "1 atm = 760 mmHg."},
+  {"f": "Units of gas volume", "b": "Liters or cubic centimeters (1 cm³ = 1 mL)."},
+  {"f": "Temperature scale used in gas equations", "b": "The absolute (Kelvin) scale."},
+  {"f": "0 °C in Kelvin", "b": "273.15 K."},
+  {"f": "Boyle's Law statement", "b": "At constant temperature, the volume of a fixed gas mass is inversely proportional to pressure (PV = k)."},
+  {"f": "Charles'/Gay-Lussac's Law statement", "b": "At constant pressure, the volume of a fixed gas mass is directly proportional to its absolute temperature (V = kT)."},
+  {"f": "Combined gas law equation", "b": "P₁V₁ / T₁ = P₂V₂ / T₂."},
+  {"f": "Ideal gas equation for 1 mole", "b": "PV = RT."},
+  {"f": "Ideal gas equation for n moles", "b": "PV = nRT."},
+  {"f": "Value of R in atm units", "b": "0.08205 L·atm/mol·K (≈0.083)."},
+  {"f": "Value of R in dynes/cm² units", "b": "8.314 J/mol·K."},
+  {"f": "Kinetic Molecular Theory — purpose", "b": "It was developed to explain gas behavior and support the validity of the gas laws."},
+];
+
+const flashDataL2 = [
+  {"f": "Order the three states by rate of diffusion (lowest→highest)", "b": "Solid < Liquid < Gas."},
+  {"f": "Order the three states by compressibility (hardest→easiest to compress)", "b": "Solid (hardest) < Liquid < Gas (easiest)."},
+  {"f": "Why can gas particles move freely while solid particles cannot?", "b": "Because the force of attraction between gas particles is negligible, while in solids strong attraction and tight packing restrict particles to vibration only."},
+  {"f": "Difference between intramolecular and intermolecular forces", "b": "Intramolecular = bonds holding atoms together WITHIN a molecule; intermolecular = attractive/repulsive forces BETWEEN separate molecules."},
+  {"f": "Difference between cohesion and adhesion", "b": "Cohesion = attraction between like molecules; adhesion = attraction between unlike molecules."},
+  {"f": "What governs intermolecular bonding, and how does it differ from intramolecular (covalent) bonding?", "b": "Both are governed by electron orbital interactions, but covalency (electron sharing) is established in intramolecular bonds, not in the intermolecular state."},
+  {"f": "What must be balanced for two molecules to interact stably?", "b": "The attractive and repulsive forces between them."},
+  {"f": "On the energy–distance curve, what happens at the equilibrium distance rₑ?", "b": "The net energy reaches its minimum — attraction and repulsion are balanced there."},
+  {"f": "How does the strength of a Van der Waals force change with distance?", "b": "It depends strongly on the distance between the interacting atoms/molecules — closer distances give stronger (but still weak) interactions; the nature (attract/repel) also depends on distance."},
+  {"f": "Mechanism by which Van der Waals interactions arise between two neutral atoms", "b": "A momentary shift in electron density creates a fluctuating dipole in one atom, which induces a charge separation in a neighboring atom, leading to attraction."},
+  {"f": "Why does hydrogen (rather than other atoms) form unusually strong hydrogen bonds?", "b": "Its very small size combined with a large electrostatic field lets it approach very close to an electronegative atom (F, O, N)."},
+  {"f": "Explain why water has a high boiling point relative to its small molecular size.", "b": "Extensive hydrogen bonding between water molecules requires extra energy to break, raising the boiling point."},
+  {"f": "Relationship between vapor pressure and hydrogen bonding in water", "b": "Hydrogen bonding lowers water's vapor pressure because more energy is needed for molecules to escape into the vapor phase."},
+  {"f": "How does increasing temperature drive a solid through the states of matter?", "b": "Heating gives lattice atoms enough energy to break the ordered solid structure (→ liquid), then enough further energy to escape into the gaseous state."},
+  {"f": "What special property must a solid have to sublime at room temperature?", "b": "A high vapor pressure (e.g., iodine, camphor)."},
+  {"f": "Contrast sublimation and deposition", "b": "Sublimation: solid → gas directly (no melting). Deposition: gas → solid directly (the reverse)."},
+  {"f": "Why do gases exert measurable pressure on their container walls?", "b": "Because of their vigorous, rapid random motion, which causes frequent collisions with the walls."},
+  {"f": "Convert 1 atm to mmHg and explain the relevance.", "b": "1 atm = 760 mmHg; this is the standard reference pressure used in the gas laws."},
+  {"f": "State Boyle's Law and the condition under which it applies.", "b": "PV = k (P ∝ 1/V) — applies at constant temperature for a fixed mass of gas."},
+  {"f": "State Charles'/Gay-Lussac's Law and its constant condition.", "b": "V = kT (V ∝ T) — applies at constant pressure for a fixed mass of gas."},
+  {"f": "How is the combined gas law derived?", "b": "By combining Boyle's Law and Charles'/Gay-Lussac's Law into P₁V₁/T₁ = P₂V₂/T₂."},
+  {"f": "Worked example: NO gas occupies 30.0 mL at 20°C and 740 mmHg. What is the setup to find its volume at 0°C and 760 mmHg?", "b": "(740×30.0)/(273+20) = (760×V₂)/273, giving V₂ = 27.2 mL."},
+  {"f": "Why must temperature be converted to Kelvin before using the combined gas law?", "b": "Because the gas laws require the absolute temperature scale, where 0°C = 273.15 K, for the proportionality to hold correctly."},
+  {"f": "Relationship between PV=RT (1 mole) and PV=nRT (n moles)", "b": "PV=RT applies only to exactly 1 mole of gas; multiplying R by n moles generalizes it to any amount of gas: PV=nRT."},
+  {"f": "Why does R have two different numeric values in the lecture?", "b": "Because R's value depends on the pressure unit used: 0.08205 L·atm/mol·K when P is in atm, or 8.314 J/mol·K when P is in dynes/cm² (SI-consistent units)."},
+  {"f": "Worked example: What is the volume of 2 moles of ideal gas at 25°C and 780 mmHg? (setup)", "b": "Convert 780 mmHg to atm (780/760), then solve (780/760)×V = 2×0.08205×298 → V = 47.65 L."},
+  {"f": "How is the ideal gas law adapted to solve for molecular weight?", "b": "Replace n with g/M (grams ÷ molecular weight) in PV=nRT, then rearrange to M = gRT/PV."},
+  {"f": "Worked example: 0.30 g ethanol vapor occupies 200 mL at 1 atm and 100°C — what MW does this give?", "b": "M = (0.30 × 0.08205 × 373) / (1 × 0.2) = 46.0 g/mol."},
+  {"f": "What three quantities does the Victor Meyer method measure to find molecular weight?", "b": "The mass of the liquid, the vapor's volume, and the temperature and barometric pressure at which that volume is measured."},
+  {"f": "Under what conditions does the Kinetic Molecular Theory's assumption of negligible particle volume hold best?", "b": "At low pressures and high temperatures, where gas molecules are far apart."},
+  {"f": "Under what conditions does the KMT assumption of no attraction between particles hold best?", "b": "At low pressures."},
+  {"f": "What does 'perfect elasticity' mean in the Kinetic Molecular Theory?", "b": "There is no net loss of speed or transfer of energy when gas molecules collide with each other or the container walls."},
+  {"f": "List the four postulates of the Kinetic Molecular Theory.", "b": "1) Negligible particle volume, 2) no attraction between particles, 3) continuous random motion, 4) perfectly elastic collisions."},
+  {"f": "Contrast a real gas and an ideal gas in terms of particle volume.", "b": "Real gas particles have measurable volume; ideal gas particles are assumed to have no volume."},
+  {"f": "Contrast a real gas and an ideal gas in terms of collisions.", "b": "Real gas collisions lose some energy; ideal gas collisions are perfectly elastic (no energy loss)."},
+  {"f": "Contrast a real gas and an ideal gas in terms of intermolecular forces.", "b": "Real gases have intermolecular forces between particles; ideal gases assume no interactions between particles at all."},
+  {"f": "Under what two conditions do real gases behave most like ideal gases, and why?", "b": "At high temperature and low pressure — particles are far apart and moving fast, so their own volume and mutual attractions become negligible."},
+  {"f": "Why is compressibility highest in gases but lowest in solids?", "b": "Gas particles are far apart with large empty space between them (easy to compress); solid particles are tightly packed with almost no empty space (hard to compress)."},
+  {"f": "Why is diffusion fastest in gases?", "b": "Gas particles have high kinetic energy, negligible attraction, and lots of free space to move into, unlike the restricted, closely packed particles of liquids and solids."},
+  {"f": "Explain, using intermolecular forces, why liquids can flow but solids cannot.", "b": "Liquid particles have weaker attractive forces and enough space to slide past one another, while solid particles are held rigidly in place by stronger forces and tight packing."},
+  {"f": "Why is it inaccurate to say intermolecular forces are only attractive?", "b": "Because intermolecular interactions also include repulsion — a reaction that forces molecules apart when they get too close — alongside attraction (cohesion/adhesion)."},
+  {"f": "Why does temperature need to be in Kelvin, but pressure/volume in the gas laws can use any consistent unit?", "b": "Because Charles'/Gay-Lussac's proportionality (V ∝ T) is only true on an absolute scale where zero truly means zero volume/energy; pressure and volume ratios remain valid in any consistent unit as long as both sides of an equation use the same unit."},
+  {"f": "How would doubling the pressure on a fixed mass of gas (constant T) affect its volume, per Boyle's Law?", "b": "The volume would be halved, since PV = k (P and V are inversely proportional)."},
+  {"f": "How would doubling the absolute temperature of a fixed mass of gas (constant P) affect its volume, per Charles' Law?", "b": "The volume would double, since V = kT (V and T are directly proportional)."},
+  {"f": "Why does the lecture describe intermolecular bonding as governed by 'electron orbital interactions' rather than covalent bonds?", "b": "Because unlike intramolecular covalent bonds, covalency (true electron sharing) is not established between separate molecules — the attraction arises from orbital-level charge interactions instead."},
+  {"f": "What determines whether a Van der Waals interaction between two atoms is net attractive or net repulsive?", "b": "The distance between them — attraction dominates at moderate distances, but repulsion dominates when atoms get too close (as shown on the energy–distance curve)."},
+  {"f": "Relate hydrogen bonding to the general category of intermolecular forces.", "b": "A hydrogen bond is a special, comparatively strong type of intermolecular (not intramolecular) attraction, formed specifically between H and a highly electronegative atom (F, O, N)."},
+  {"f": "Why is the assay example (ethyl nitrite spirit) a good illustration of the combined gas law?", "b": "Because it changes both temperature and pressure simultaneously (20°C→0°C and 740→760 mmHg) while asking for the new volume, which requires P₁V₁/T₁ = P₂V₂/T₂ rather than Boyle's or Charles' law alone."},
+  {"f": "Why must gas volume be converted to liters before using R = 0.08205 L·atm/mol·K?", "b": "Because that value of R is defined in liter-atmosphere units, so volume must match those units for the equation PV = nRT to give a correct result."},
+  {"f": "What is the logical link between Kinetic Molecular Theory and Boyle's/Charles' Laws?", "b": "KMT's postulates (negligible volume, no attraction, elastic collisions) provide the physical explanation for why gases obey the simple proportional relationships described by Boyle's and Charles' Laws."},
+];
+
+const flashDataL3 = [
+  {"f": "Derive the combined gas law from Boyle's and Charles' Laws.", "b": "Boyle: PV=k₁ (const. T); Charles: V/T=k₂ (const. P). Combining both proportionalities for a fixed gas mass gives PV/T = constant, i.e., P₁V₁/T₁ = P₂V₂/T₂."},
+  {"f": "Using PV=nRT, if you double both the amount of gas (n) and the absolute temperature (T) while holding volume constant, what happens to pressure?", "b": "Pressure quadruples, since P = nRT/V and both n and T doubled (2×2=4), while V and R are unchanged."},
+  {"f": "A gas sample has volume V₁ at P₁, T₁. If pressure triples and temperature doubles, express the new volume V₂ in terms of V₁.", "b": "From P₁V₁/T₁ = P₂V₂/T₂: V₂ = V₁ × (P₁/P₂) × (T₂/T₁) = V₁ × (1/3) × 2 = (2/3)V₁."},
+  {"f": "Explain why the ideal gas law breaks down at very high pressure, using KMT and real-gas concepts.", "b": "At high pressure, molecules are forced close together, so their own finite volume becomes a significant fraction of the container volume (violating KMT postulate 1), and intermolecular attractive forces become significant (violating postulate 2), causing deviation from PV=nRT."},
+  {"f": "Explain why the ideal gas law breaks down at very low temperature.", "b": "At low temperature, molecules move slowly, so intermolecular attractive forces (negligible at high KE) become significant relative to kinetic energy, causing molecules to attract each other and eventually condense, deviating from ideal behavior."},
+  {"f": "If R = 0.08205 L·atm/mol·K and R = 8.314 J/mol·K describe the same physical constant, what does this tell you about unit conversion between L·atm and J?", "b": "Since both express the same R, 1 L·atm ≈ 8.314/0.08205 ≈ 101.3 J — consistent with the fact that 1 L·atm = 101.325 J."},
+  {"f": "Explain why M = gRT/PV can be derived directly from PV = nRT without any new physical assumption.", "b": "Because moles n is always defined as mass ÷ molar mass (n = g/M); substituting this definition into PV=nRT and rearranging algebraically gives M = gRT/PV — no new physics, just algebra."},
+  {"f": "In the Victor Meyer method, why must both temperature AND barometric pressure be recorded at the moment the vapor volume is measured?", "b": "Because the volume of a gas depends on both T and P (per the ideal gas law); without knowing both, the measured volume cannot be converted into a valid mole count to calculate molecular weight."},
+  {"f": "A solid with weak intermolecular forces but high vapor pressure at room temperature is heated slightly. Predict its most likely phase transition and justify using the lecture's concepts.", "b": "It would likely sublime directly to gas (like iodine or camphor) rather than melt first, because a high vapor pressure at room temperature means the solid→gas transition already competes favorably with solid→liquid."},
+  {"f": "Explain, in terms of intermolecular forces, why hydrogen bonds are stronger than typical Van der Waals forces even though both are 'intermolecular.'", "b": "Van der Waals forces arise from transient, fluctuating dipoles with weak charge separation, while a hydrogen bond involves a real, persistent large electrostatic field from the small hydrogen atom interacting with a genuinely electronegative atom (F, O, N) — a stronger and more directional interaction."},
+  {"f": "Why does the lecture describe the interaction curve as having both a repulsive branch and an attractive branch, and what physically causes each?", "b": "At long range, electron cloud fluctuations/opposite charges cause net attraction (falling energy); at very short range, overlapping electron clouds and nuclear charges cause strong repulsion (energy rises sharply) — the balance point is rₑ, the equilibrium distance."},
+  {"f": "If two gas samples of different gases are at the same T and P and occupy the same volume, what does this imply about their number of moles, and why?", "b": "They contain the same number of moles, because PV=nRT means n = PV/RT — with P, V, R, T identical, n must be identical (this is essentially Avogadro's principle, following directly from the ideal gas law)."},
+  {"f": "A student measures 0.50 g of an unknown vapor occupying 250 mL at 1 atm and 127°C. Set up (do not just quote) the equation to find its molecular weight.", "b": "M = gRT/PV = (0.50 × 0.08205 × 400) / (1 × 0.25), using T = 273+127 = 400 K and V = 0.25 L."},
+  {"f": "Solve the previous problem for M.", "b": "M = (0.50 × 0.08205 × 400) / (1 × 0.25) = 16.41 / 0.25 = 65.6 g/mol."},
+  {"f": "A fixed mass of gas occupies 10 L at 2 atm and 300 K. What volume will it occupy at 4 atm and 600 K?", "b": "Using P₁V₁/T₁=P₂V₂/T₂: (2×10)/300 = (4×V₂)/600 → V₂ = (2×10×600)/(300×4) = 12000/1200 = 10 L (unchanged, since both P and T doubled proportionally)."},
+  {"f": "Why does the previous result make physical sense in terms of Boyle's and Charles' Laws combined?", "b": "Doubling T alone would double V (Charles), but doubling P alone would halve V (Boyle); doing both simultaneously exactly cancels out, leaving V unchanged."},
+  {"f": "Explain why intermolecular forces, not intramolecular forces, determine whether a substance is a solid, liquid, or gas at a given temperature.", "b": "The state of matter depends on how strongly molecules attract and how much kinetic energy they have relative to that attraction — governed by intermolecular forces — while intramolecular (covalent) bonds hold each individual molecule together regardless of its physical state."},
+  {"f": "Why is it conceptually significant that Van der Waals forces exist even between nonpolar, electrically neutral atoms/molecules?", "b": "It shows that attraction can arise purely from instantaneous, statistical fluctuations in electron distribution (temporary dipoles) rather than requiring a permanent charge or polarity — explaining why even noble gases can liquefy at low enough temperature."},
+  {"f": "Explain why real gases deviate MORE from ideal behavior as pressure increases, but LESS as temperature increases, using KMT logic.", "b": "Higher pressure forces particles closer together, making their finite volume and mutual attraction significant (KMT assumptions fail); higher temperature increases kinetic energy relative to attractive forces, making the KMT assumptions (negligible volume/attraction) more valid again."},
+  {"f": "A gas is compressed to a very small volume at low temperature. Predict qualitatively how it will deviate from PV=nRT and why.", "b": "It will show significant deviation — pressure will likely be lower than ideal-gas prediction at first (due to attraction) or higher at extreme compression (due to finite particle volume), because both KMT assumptions of negligible volume and no attraction fail under these conditions."},
+  {"f": "Using the definition n=g/M, show algebraically how PV=nRT transforms into the Victor Meyer molecular weight equation.", "b": "PV = nRT → PV = (g/M)RT → multiply both sides by M and divide by PV → M = gRT/PV."},
+  {"f": "Why does the lecture list R in two different unit systems (L·atm/mol·K and J/mol·K) rather than just one?", "b": "Because pressure can be measured either in atmospheres (common in lab/pharmacy contexts) or in dynes/cm² (a CGS/SI-related unit), and R's numeric value must match whichever pressure unit is used for PV=nRT to be dimensionally consistent."},
+  {"f": "Explain why the assumption 'particles do not attract one another' in KMT is stated as applying 'only at low pressures.'", "b": "At higher pressures, particles are forced closer together, and the (normally negligible) attractive intermolecular forces become significant enough to affect gas behavior, violating the idealized assumption."},
+  {"f": "If a gas obeyed Boyle's Law perfectly at all pressures, what would a plot of P vs. 1/V look like, and why?", "b": "A straight line through the origin, because PV=k means P = k×(1/V), a direct proportionality between P and 1/V."},
+  {"f": "If a gas obeyed Charles' Law perfectly at all temperatures, what would happen to its volume as T approaches 0 K?", "b": "Its volume would approach zero, since V=kT means V is directly proportional to absolute temperature — though real gases liquefy/solidify before reaching 0 K, which is why this is an idealization."},
+  {"f": "Explain conceptually why 'dielectric constant,' 'vapor pressure,' and 'boiling point' are all connected to the same underlying cause in water.", "b": "All three properties are governed by the strength and extent of hydrogen bonding between water molecules: strong intermolecular attraction raises the boiling point, lowers vapor pressure (harder to escape to vapor), and increases the dielectric constant (water molecules reorient strongly around charges)."},
+  {"f": "Why is 'the total volume of gas molecules is negligible relative to their container' listed as a low-pressure, high-temperature condition specifically (not just 'at low pressure')?", "b": "Because both low pressure (particles spread far apart) and high temperature (particles moving fast, occupying more effective space) independently increase the average distance between molecules, making their own finite volume comparatively negligible."},
+  {"f": "Two identical containers hold different gases at the same T and P but different volumes. What does this most likely indicate, per the ideal gas law?", "b": "They contain different numbers of moles — since PV=nRT with identical P and T means V is directly proportional to n; a larger volume implies more moles of that gas."},
+  {"f": "Explain the physical link between the ideal gas postulates and why real gases liquefy but 'ideal gases' theoretically never do.", "b": "Liquefaction requires intermolecular attraction to overcome kinetic energy and pull molecules into a condensed phase; since ideal gas theory assumes zero attraction and zero particle volume, an ideal gas has no mechanism to condense, no matter how much it is cooled or compressed."},
+  {"f": "A hydrogen bond and a covalent O–H bond both involve hydrogen and oxygen — how does the lecture distinguish which category (intra- vs intermolecular) each belongs to?", "b": "The covalent O–H bond within a single water molecule is an intramolecular force (holds the molecule's own atoms together); the hydrogen bond linking one water molecule's H to a neighboring molecule's O is an intermolecular force (between separate molecules)."},
+  {"f": "Why might increasing temperature eventually break hydrogen bonds in water, and what macroscopic change does this cause?", "b": "Higher temperature gives molecules more kinetic energy, which can overcome the hydrogen-bond attraction between them; as bonds break, the tightly networked liquid structure loosens and eventually vaporizes at the boiling point."},
+  {"f": "Using the equilibrium distance (rₑ) concept, explain why molecules don't collapse into each other despite mutual attraction.", "b": "As molecules approach closer than rₑ, short-range repulsion (from overlapping electron clouds) rises sharply and exceeds the attractive force, pushing them back toward rₑ — the point of minimum (most stable) net energy."},
+  {"f": "A gas sample's pressure is measured in dynes/cm². Which value of R must be used in PV=nRT, and why can't the other value be used?", "b": "R = 8.314 J/mol·K must be used, because it is defined for the pressure unit dynes/cm² (CGS/SI-consistent); using R = 0.08205 L·atm/mol·K would require pressure in atmospheres, giving a dimensionally inconsistent (wrong) result."},
+  {"f": "Explain why 'high vapor pressure' is the key property that allows a solid to sublime, in terms of the competition between phase transitions.", "b": "A solid's vapor pressure reflects how readily its particles escape into the gas phase; if this vapor pressure is already high at room temperature/pressure, the solid→gas pathway becomes favorable before the solid ever accumulates enough energy to fully melt into a liquid."},
+  {"f": "Compare the reversibility implied by sublimation/deposition with melting/freezing, using the lecture's terminology.", "b": "Just as melting (solid→liquid) and freezing (liquid→solid) are a reversible pair, sublimation (solid→gas) and deposition (gas→solid) are also described as reverse processes of one another, bypassing the liquid phase entirely."},
+  {"f": "If you increased both the volume and temperature of a fixed mass of ideal gas proportionally, what would happen to its pressure?", "b": "Pressure would remain constant — since PV=nRT with n and R fixed, if V and T increase by the same factor, P = nRT/V stays unchanged."},
+  {"f": "Explain why the lecture emphasizes that KMT assumptions apply 'only at low pressures' for postulates 1 and 2, but does not add this qualifier to postulates 3 and 4.", "b": "Postulates 1 (negligible volume) and 2 (no attraction) are approximations that fail as pressure rises, while postulates 3 (random motion from kinetic energy) and 4 (perfectly elastic collisions) are treated as fundamental/always-true assumptions of the model, independent of pressure."},
+  {"f": "Using intermolecular-force reasoning, predict which would have a higher boiling point: a liquid held together mainly by hydrogen bonds, or one held together mainly by weak Van der Waals forces (similar molecular weight). Justify.", "b": "The hydrogen-bonded liquid would have the higher boiling point, because hydrogen bonds are a stronger, more directional intermolecular attraction than the weak, distance-dependent Van der Waals forces, requiring more energy to separate the molecules into vapor."},
+  {"f": "Explain how the concept of 'aggregates' ties together intermolecular forces and the three states of matter.", "b": "The lecture states molecules must have intermolecular forces to exist as aggregates in gases, liquids, and solids — meaning the very existence of matter in bulk (rather than isolated single molecules) depends on some degree of attraction between molecules, with the strength of that attraction (and particle spacing/energy) determining which of the three states results."},
+  {"f": "Summarize, as an exam-ready synthesis, why 'high temperature + low pressure' is the single condition that makes both KMT's assumptions AND real-gas-to-ideal-gas convergence valid simultaneously.", "b": "Both effects stem from the same root cause: at high T and low P, gas particles are far apart (increasing average intermolecular distance) and moving fast (high kinetic energy relative to attractive forces), so particle volume and intermolecular attraction become negligible compared to the container volume and thermal energy — the same physical situation underlies both KMT's idealizations and real gases' approach to ideal behavior."},
+];
+
+const flashLevels = {1:flashDataL1, 2:flashDataL2, 3:flashDataL3};
+let fcLevel = 1;
+let flashData = flashLevels[fcLevel];
+let fcOrder = flashData.map((_,i)=>i);
+let fcIndex = 0;
+const fcFront=document.getElementById('fcFront'), fcBack=document.getElementById('fcBack');
+const fcCard=document.getElementById('flashcard');
+const fcProgress=document.getElementById('fcProgress');
+const fcDeckNote=document.getElementById('fcDeckNote');
+const fcLevelLabels = {1:'Level 1 · Easy', 2:'Level 2 · Medium', 3:'Level 3 · Hard'};
+
+function renderFC(){
+  const idx = fcOrder[fcIndex];
+  fcCard.classList.remove('flipped');
+  fcFront.textContent = flashData[idx].f;
+  fcBack.textContent = flashData[idx].b;
+  fcProgress.textContent = `Card ${fcIndex+1} / ${flashData.length}`;
+}
+fcCard.addEventListener('click',()=>fcCard.classList.toggle('flipped'));
+document.getElementById('fcNext').addEventListener('click',()=>{ fcIndex=(fcIndex+1)%flashData.length; renderFC(); });
+document.getElementById('fcPrev').addEventListener('click',()=>{ fcIndex=(fcIndex-1+flashData.length)%flashData.length; renderFC(); });
+document.getElementById('fcShuffle').addEventListener('click',()=>{
+  for(let i=fcOrder.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [fcOrder[i],fcOrder[j]]=[fcOrder[j],fcOrder[i]]; }
+  fcIndex=0; renderFC();
+});
+document.querySelectorAll('#fcLevelTabs button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    fcLevel = parseInt(btn.dataset.level,10);
+    document.querySelectorAll('#fcLevelTabs button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    flashData = flashLevels[fcLevel];
+    fcOrder = flashData.map((_,i)=>i);
+    fcIndex = 0;
+    fcDeckNote.textContent = `Deck of ${flashData.length} cards (${fcLevelLabels[fcLevel]}), built from every definition and formula in the lecture.`;
+    renderFC();
+  });
+});
+renderFC();
+
+/* ============ QUIZ BANK ============ */
+const quizDataL1 = [
+  {"q": "What is matter, by definition?", "correct": "Anything that takes up space and can be weighed", "wrong": ["Only substances with a fixed shape", "Anything visible to the human eye", "Only substances that flow"]},
+  {"q": "What are the three basic states of matter?", "correct": "Solid, liquid, and gas", "wrong": ["Solid, liquid, and plasma", "Ice, water, and steam only", "Crystal, amorphous, and gas"]},
+  {"q": "Which two external factors are described as separating the states of matter?", "correct": "Pressure and temperature", "wrong": ["Mass and volume", "Color and density", "Time and light"]},
+  {"q": "Which of the following is an example of a rigid substance with a fixed shape?", "correct": "Wood", "wrong": ["Water", "Air", "Oxygen gas"]},
+  {"q": "Which substance flows and takes the shape of its container?", "correct": "Water", "wrong": ["Stone", "Wood", "Sugar (solid)"]},
+  {"q": "Which of these has no definite shape or size?", "correct": "Air", "wrong": ["Rock", "Ice", "Sugar"]},
+  {"q": "How are particles arranged in a solid?", "correct": "Tightly/closely packed", "wrong": ["Far apart", "Loosely packed but flowing", "Randomly scattered with large gaps"]},
+  {"q": "Why are solids difficult to compress?", "correct": "The gaps between their particles are tiny", "wrong": ["Their particles move freely", "Their particles have no mass", "Their particles are far apart"]},
+  {"q": "Which property is true of a solid?", "correct": "Fixed shape and fixed volume", "wrong": ["Fixed volume, no fixed shape", "No fixed volume, no fixed shape", "No fixed volume, fixed shape"]},
+  {"q": "What can particles in a solid do, due to its rigid nature?", "correct": "Only vibrate about their mean position", "wrong": ["Move freely across the container", "Diffuse rapidly", "Flow to fit any container"]},
+  {"q": "How would you describe the rate of diffusion in solids?", "correct": "Very low", "wrong": ["Very high", "Equal to that in gases", "Equal to that in liquids"]},
+  {"q": "Which of the following is listed as an example of a solid?", "correct": "Rock", "wrong": ["Milk", "Air", "Coffee"]},
+  {"q": "Compared with solids, how are particles packed in a liquid?", "correct": "Less tightly packed", "wrong": ["More tightly packed", "Packed identically to a solid", "Not packed at all"]},
+  {"q": "What shape does a liquid take?", "correct": "The shape of its container", "wrong": ["A fixed shape of its own", "No shape at all, like a gas", "Always a spherical shape"]},
+  {"q": "Why are liquids difficult to compress?", "correct": "Their particles have little space between them to move", "wrong": ["Their particles have no attraction to each other", "Their particles are extremely far apart", "They have no fixed volume"]},
+  {"q": "Which best describes a liquid's shape and volume?", "correct": "Fixed volume but no fixed shape", "wrong": ["Fixed shape but no fixed volume", "No fixed shape and no fixed volume", "Fixed shape and fixed volume"]},
+  {"q": "How does the diffusion rate in liquids compare to solids?", "correct": "Higher than in solids", "wrong": ["Lower than in solids", "Identical to solids", "Zero"]},
+  {"q": "How does the force of attraction between liquid particles compare to solids?", "correct": "Weaker than in solids", "wrong": ["Stronger than in solids", "Identical to solids", "Nonexistent"]},
+  {"q": "Which of these is an example of a liquid given in the lecture?", "correct": "Blood", "wrong": ["Rock", "Helium", "Sugar"]},
+  {"q": "How are particles arranged in a gas?", "correct": "Far apart from each other", "wrong": ["Tightly packed", "Vibrating about a fixed point only", "Arranged in a rigid lattice"]},
+  {"q": "What is true about the force of attraction between gas particles?", "correct": "It is negligible, allowing free movement", "wrong": ["It is the strongest of the three states", "It equals that of solids", "It only exists at low temperature"]},
+  {"q": "Which best describes the shape and volume of a gas?", "correct": "Neither fixed shape nor fixed volume", "wrong": ["Fixed shape but no fixed volume", "Fixed volume but no fixed shape", "Both fixed shape and volume"]},
+  {"q": "Which state of matter has the highest compressibility?", "correct": "Gas", "wrong": ["Liquid", "Solid", "All are equal"]},
+  {"q": "How does the diffusion rate of gases compare with solids and liquids?", "correct": "Higher than both", "wrong": ["Lower than both", "Equal to solids", "Equal to liquids"]},
+  {"q": "How does the kinetic energy of gas particles compare with solids and liquids?", "correct": "Higher than both", "wrong": ["Lower than both", "Equal to solids", "Equal to liquids"]},
+  {"q": "Which of the following is NOT listed as an example of a gas in the lecture?", "correct": "Milk", "wrong": ["Helium", "Nitrogen", "Carbon dioxide"]},
+  {"q": "What are intermolecular forces?", "correct": "Attractive and repulsive forces that arise between molecules of a substance", "wrong": ["Bonds within a single molecule", "Forces found only in solids", "Forces between protons and neutrons"]},
+  {"q": "What are intramolecular forces?", "correct": "The chemical bonds holding the atoms together within a molecule", "wrong": ["Forces between two different substances", "Forces between a molecule and its container", "Forces found only in gases"]},
+  {"q": "For molecules to exist as aggregates in gases, liquids, and solids, what must exist?", "correct": "Intermolecular forces", "wrong": ["Intramolecular forces only", "Nuclear forces", "Gravitational forces alone"]},
+  {"q": "What is cohesion?", "correct": "The attraction of like molecules", "wrong": ["The attraction of unlike molecules", "A repulsive force between identical molecules", "A type of covalent bond"]},
+  {"q": "What is adhesion?", "correct": "The attraction of unlike molecules", "wrong": ["The attraction of like molecules", "A synonym for cohesion", "A property unique to gases"]},
+  {"q": "What is repulsion, in the context of intermolecular forces?", "correct": "A reaction between two molecules that forces them apart", "wrong": ["An attraction that pulls molecules together", "A bond that never occurs between molecules", "The same as cohesion"]},
+  {"q": "Are Van der Waals forces ionic in nature?", "correct": "No — they are nonionic, though they involve charge–charge interactions", "wrong": ["Yes — they are strictly ionic bonds", "Yes — they involve full electron transfer", "No — they involve no charge interactions at all"]},
+  {"q": "What do Van der Waals forces depend on?", "correct": "The distance between the atoms or molecules", "wrong": ["The color of the molecule", "The molecular weight only", "The temperature of the container only"]},
+  {"q": "What causes Van der Waals forces to arise?", "correct": "A transient shift in electron density creating a fluctuating dipole", "wrong": ["Complete transfer of electrons between atoms", "Permanent, fixed dipoles that never change", "Nuclear fusion between atoms"]},
+  {"q": "A hydrogen bond forms between a hydrogen atom and which type of atom?", "correct": "A strongly electronegative atom such as F, O, or N", "wrong": ["Any carbon atom", "A noble gas atom", "Another hydrogen atom only"]},
+  {"q": "Why can hydrogen move in close to an electronegative atom to form a hydrogen bond?", "correct": "Because of its small size and large electrostatic field", "wrong": ["Because it has a negative charge", "Because it is the heaviest atom", "Because it has no electrostatic field"]},
+  {"q": "In which substance(s) does hydrogen bonding exist, per the lecture?", "correct": "Ice and liquid water", "wrong": ["Only in gaseous oxygen", "Only in solid iodine", "Only in nitrogen gas"]},
+  {"q": "Which property of water is explained by hydrogen bonding?", "correct": "High boiling point, low vapor pressure, high dielectric constant", "wrong": ["Low boiling point only", "Complete absence of polarity", "Inability to dissolve any compound"]},
+  {"q": "What are the three primary states/phases of matter mentioned under 'States of Matter'?", "correct": "Gases, liquids, and crystalline solids", "wrong": ["Solids, plasmas, and gases", "Liquids, plasmas, and crystals", "Gases, liquids, and amorphous solids only"]},
+  {"q": "What holds molecules, atoms, and ions close together in the solid state?", "correct": "Intermolecular forces", "wrong": ["Gravity alone", "Magnetic fields", "Nuclear forces"]},
+  {"q": "What happens to atoms in a solid as its temperature is raised?", "correct": "They gain enough energy to disrupt the lattice and become a liquid", "wrong": ["They lose all kinetic energy", "They immediately become a gas", "They stop vibrating entirely"]},
+  {"q": "What is sublimation?", "correct": "A solid passing directly into a gas without melting", "wrong": ["A gas condensing directly into a solid", "A liquid evaporating into a gas", "A solid melting into a liquid"]},
+  {"q": "Which two substances are given as examples of sublimation?", "correct": "Iodine and camphor", "wrong": ["Water and ethanol", "Sugar and salt", "Oxygen and nitrogen"]},
+  {"q": "What is deposition?", "correct": "A gas condensing directly into a solid", "wrong": ["A solid subliming into a gas", "A liquid freezing into a solid", "A gas expanding at constant pressure"]},
+  {"q": "Why do gas molecules exert pressure on their container?", "correct": "Due to vigorous, rapid motion and collisions with the walls", "wrong": ["Because they are stationary", "Because they attract the container walls", "Because of gravity alone"]},
+  {"q": "In which unit is gas pressure expressed according to the lecture?", "correct": "Dynes/cm²", "wrong": ["Newtons/liter", "Joules/mole", "Kelvin"]},
+  {"q": "How many mmHg are in 1 atmosphere?", "correct": "760 mmHg", "wrong": ["100 mmHg", "1000 mmHg", "273 mmHg"]},
+  {"q": "What is 1 cm³ equal to?", "correct": "1 mL", "wrong": ["1 L", "10 mL", "0.1 mL"]},
+  {"q": "Which temperature scale is used in the gas equations?", "correct": "The absolute (Kelvin) scale", "wrong": ["The Fahrenheit scale", "The Celsius scale only", "The Rankine scale"]},
+  {"q": "What is 0 °C equal to in Kelvin?", "correct": "273.15 K", "wrong": ["0 K", "100 K", "373 K"]},
+  {"q": "Boyle's Law relates which two variables at constant temperature?", "correct": "Pressure and volume", "wrong": ["Volume and temperature", "Pressure and temperature", "Moles and temperature"]},
+  {"q": "According to Boyle's Law, pressure is:", "correct": "Inversely proportional to volume", "wrong": ["Directly proportional to volume", "Unrelated to volume", "Proportional to the square of volume"]},
+  {"q": "Charles'/Gay-Lussac's Law states that at constant pressure, volume is:", "correct": "Directly proportional to absolute temperature", "wrong": ["Inversely proportional to temperature", "Unrelated to temperature", "Proportional to the square of temperature"]},
+  {"q": "What is the combined gas law equation?", "correct": "P₁V₁/T₁ = P₂V₂/T₂", "wrong": ["P₁/V₁ = P₂/V₂", "P₁V₁T₁ = P₂V₂T₂", "V₁/P₁T₁ = V₂/P₂T₂"]},
+  {"q": "What is the ideal gas equation for 1 mole of gas?", "correct": "PV = RT", "wrong": ["PV = R/T", "P = VRT", "PVT = R"]},
+  {"q": "What is the ideal gas equation for n moles of gas?", "correct": "PV = nRT", "wrong": ["PV = nR/T", "PV = n + RT", "P = nRTV"]},
+  {"q": "What is the value of R when pressure is expressed in atmospheres?", "correct": "0.08205 L·atm/mol·K", "wrong": ["8.314 L·atm/mol·K", "1.987 L·atm/mol·K", "22.4 L·atm/mol·K"]},
+  {"q": "What is the value of R when pressure is expressed in dynes/cm²?", "correct": "8.314 J/mol·K", "wrong": ["0.08205 J/mol·K", "1 J/mol·K", "760 J/mol·K"]},
+  {"q": "Why was the Kinetic Molecular Theory developed?", "correct": "To explain the behavior of gases and support the validity of the gas laws", "wrong": ["To explain the structure of solids only", "To measure atomic mass directly", "To replace Boyle's Law"]},
+];
+
+const quizDataL2 = [
+  {"q": "Which correctly orders the three states of matter from lowest to highest rate of diffusion?", "correct": "Solid < Liquid < Gas", "wrong": ["Gas < Liquid < Solid", "Liquid < Solid < Gas", "All three diffuse at equal rates"]},
+  {"q": "Which correctly orders the three states from least to most compressible?", "correct": "Solid < Liquid < Gas", "wrong": ["Gas < Liquid < Solid", "Liquid < Gas < Solid", "All three compress equally"]},
+  {"q": "What best explains why gas particles move freely while solid particles cannot?", "correct": "Gas particles have negligible attraction between them, unlike the tightly bound, closely packed particles of a solid", "wrong": ["Gas particles are heavier than solid particles", "Gas particles have no kinetic energy", "Solids have no intermolecular forces at all"]},
+  {"q": "Which statement correctly distinguishes intramolecular from intermolecular forces?", "correct": "Intramolecular forces are bonds within a molecule; intermolecular forces act between separate molecules", "wrong": ["Intramolecular forces act between separate molecules; intermolecular forces are within a molecule", "Both terms describe the same type of force", "Intermolecular forces only exist in solids"]},
+  {"q": "Which pair correctly matches the terms with their definitions?", "correct": "Cohesion = attraction of like molecules; Adhesion = attraction of unlike molecules", "wrong": ["Cohesion = attraction of unlike molecules; Adhesion = attraction of like molecules", "Cohesion and adhesion are the same phenomenon", "Cohesion refers only to gases; adhesion only to solids"]},
+  {"q": "How does intermolecular bonding differ fundamentally from intramolecular (covalent) bonding, despite both involving electron orbital interactions?", "correct": "Covalency is not established in the intermolecular state, unlike in covalent intramolecular bonds", "wrong": ["Intermolecular bonds are always stronger than covalent bonds", "Intermolecular bonds involve nuclear fusion", "There is no real difference between the two"]},
+  {"q": "For two molecules to interact stably (rather than fly apart or collapse together), what must occur?", "correct": "Their attractive and repulsive forces must be balanced", "wrong": ["Only attraction may exist, with no repulsion", "Only repulsion may exist, with no attraction", "Their masses must be identical"]},
+  {"q": "On the intermolecular energy vs. distance curve, what occurs at the equilibrium distance rₑ?", "correct": "The net energy is at its minimum", "wrong": ["The net energy is at its maximum", "Repulsion alone is acting", "The molecules have zero energy"]},
+  {"q": "Which statement about Van der Waals forces and distance is correct?", "correct": "Their strength and even their attractive/repulsive nature depend on the distance between the interacting particles", "wrong": ["They are completely independent of distance", "They only exist at exactly one fixed distance", "They become stronger the farther apart the particles are"]},
+  {"q": "What physical event initiates a Van der Waals interaction between two neutral atoms?", "correct": "A transient (temporary) shift in electron density creates a fluctuating dipole that induces charge separation in a neighboring atom", "wrong": ["A permanent transfer of electrons from one atom to the other", "A nuclear reaction between the two atoms", "The formation of a full covalent bond"]},
+  {"q": "Why is hydrogen especially able to form strong hydrogen bonds compared with other atoms?", "correct": "Its small size and large electrostatic field let it approach very close to an electronegative atom", "wrong": ["It carries a full negative charge", "It is the largest atom in the periodic table", "It cannot interact with electronegative atoms"]},
+  {"q": "Water's unusually high boiling point (for its small size) is best explained by:", "correct": "Extensive hydrogen bonding between water molecules requiring extra energy to break", "wrong": ["Water having no intermolecular forces at all", "Water molecules being unusually heavy", "Water having only Van der Waals forces"]},
+  {"q": "How does hydrogen bonding affect water's vapor pressure?", "correct": "It lowers the vapor pressure, since more energy is needed for molecules to escape into vapor", "wrong": ["It raises the vapor pressure dramatically", "It has no effect on vapor pressure", "It eliminates vapor pressure entirely"]},
+  {"q": "As a solid is heated, what sequence of events occurs?", "correct": "Atoms gain energy, disrupt the lattice, become a liquid, then gain further energy to become a gas", "wrong": ["Atoms lose energy and become a gas directly", "Atoms gain energy and instantly vaporize with no liquid phase", "Nothing changes regardless of temperature"]},
+  {"q": "What special property allows a solid like iodine or camphor to sublime at room temperature?", "correct": "A high vapor pressure", "wrong": ["A very low melting point only", "Zero intermolecular forces", "An extremely high boiling point"]},
+  {"q": "Which statement correctly contrasts sublimation and deposition?", "correct": "Sublimation is solid→gas directly; deposition is gas→solid directly (the reverse)", "wrong": ["Sublimation is gas→solid; deposition is solid→gas", "Both terms describe liquid→gas transitions", "Sublimation and deposition are identical processes"]},
+  {"q": "Why do confined gas molecules exert pressure on the walls of their container?", "correct": "Vigorous, rapid random motion causes frequent collisions with the walls", "wrong": ["The molecules are stationary and press against the walls", "Gravity pulls the molecules against the walls", "The walls attract the gas molecules chemically"]},
+  {"q": "A fixed mass of gas is compressed at constant temperature. According to Boyle's Law, what happens to its pressure?", "correct": "It increases, since pressure and volume are inversely proportional", "wrong": ["It decreases", "It stays the same", "It becomes zero"]},
+  {"q": "A fixed mass of gas is cooled at constant pressure. According to Charles'/Gay-Lussac's Law, what happens to its volume?", "correct": "It decreases, since volume and absolute temperature are directly proportional", "wrong": ["It increases", "It stays the same", "It becomes infinite"]},
+  {"q": "The combined gas law, P₁V₁/T₁ = P₂V₂/T₂, is essentially a combination of which two laws?", "correct": "Boyle's Law and Charles'/Gay-Lussac's Law", "wrong": ["Boyle's Law and the ideal gas law only", "Charles' Law and the Victor Meyer method", "Kinetic Molecular Theory and Boyle's Law"]},
+  {"q": "In the worked example, NO gas occupies 30.0 mL at 20°C and 740 mmHg. Before substituting into the combined gas law, 20°C must be converted to:", "correct": "293 K (273 + 20)", "wrong": ["20 K", "253 K (273 − 20)", "473 K"]},
+  {"q": "In that same example, what is the resulting gas volume at 0°C and 760 mmHg?", "correct": "27.2 mL", "wrong": ["30.0 mL", "32.5 mL", "25.0 mL"]},
+  {"q": "Why must absolute (Kelvin) temperature be used in the gas laws rather than Celsius?", "correct": "Because the proportionality between volume and temperature only holds true on a scale where zero represents true zero volume/energy", "wrong": ["Because Celsius values are always negative", "Because Kelvin is simply a more modern unit with no physical reason", "Because Fahrenheit and Celsius give identical results"]},
+  {"q": "PV = RT applies specifically to:", "correct": "Exactly 1 mole of an ideal gas", "wrong": ["Any number of moles of any gas", "Only liquids", "Only solids at their melting point"]},
+  {"q": "Why does the gas constant R take different numeric values (0.08205 vs 8.314)?", "correct": "Because its value depends on which units are used for pressure (atm vs dynes/cm²)", "wrong": ["Because R changes with the type of gas used", "Because R changes with temperature", "Because one value is simply wrong"]},
+  {"q": "To find the volume of 2 moles of an ideal gas at 25°C and 780 mmHg using R = 0.08205 L·atm/mol·K, the pressure 780 mmHg must first be converted to:", "correct": "Atmospheres (780/760 atm)", "wrong": ["Dynes/cm² directly", "Kelvin", "Liters"]},
+  {"q": "Following that calculation, what is the resulting volume?", "correct": "47.65 L", "wrong": ["30.0 L", "2.0 L", "760 L"]},
+  {"q": "To adapt the ideal gas law to solve for molecular weight, the number of moles n is replaced with:", "correct": "g/M (mass in grams divided by molecular weight)", "wrong": ["M/g", "g × M", "R/T"]},
+  {"q": "Rearranging PV = (g/M)RT to solve for molecular weight M gives:", "correct": "M = gRT/PV", "wrong": ["M = PV/gRT", "M = PVRT/g", "M = g/(PVRT)"]},
+  {"q": "In the ethanol example (0.30 g vapor, 200 mL, 1 atm, 100°C), what absolute temperature is used in the calculation?", "correct": "373 K (273 + 100)", "wrong": ["100 K", "273 K", "473 K"]},
+  {"q": "What molecular weight does the ethanol vapor example yield?", "correct": "46.0 g/mol", "wrong": ["30.0 g/mol", "100 g/mol", "18.0 g/mol"]},
+  {"q": "In the Victor Meyer method, which three measured quantities are ultimately substituted into the molecular weight equation?", "correct": "Mass of liquid, vapor volume, and the temperature/pressure at which that volume was measured", "wrong": ["Only the mass and color of the liquid", "Only the boiling point of the liquid", "Only the container's dimensions"]},
+  {"q": "The Kinetic Molecular Theory assumption that gas particle volume is negligible holds best under which conditions?", "correct": "Low pressure and high temperature", "wrong": ["High pressure and low temperature", "High pressure and high temperature", "Any pressure and temperature equally"]},
+  {"q": "The Kinetic Molecular Theory assumption that gas particles do not attract one another holds best under which condition?", "correct": "Low pressure", "wrong": ["High pressure", "High temperature only, regardless of pressure", "Absolute zero temperature"]},
+  {"q": "What does 'perfect elasticity' mean in Kinetic Molecular Theory collisions?", "correct": "No net loss of speed or energy transfer occurs during collisions", "wrong": ["All kinetic energy is lost on collision", "Molecules stick together after colliding", "Molecules never actually collide"]},
+  {"q": "Which of the following is NOT one of the four postulates of Kinetic Molecular Theory listed in the lecture?", "correct": "Gas particles have a large, non-negligible volume", "wrong": ["Gas particles move in continuous random motion", "Gas particle collisions are perfectly elastic", "Gas particles do not attract one another (at low pressure)"]},
+  {"q": "Which statement correctly contrasts real and ideal gases regarding particle volume?", "correct": "Real gas particles have measurable volume; ideal gas particles are assumed to have none", "wrong": ["Both are assumed to have zero volume", "Real gas particles have zero volume; ideal gas particles have volume", "Neither concept addresses particle volume"]},
+  {"q": "Which statement correctly contrasts real and ideal gases regarding collisions?", "correct": "Real gas collisions lose energy; ideal gas collisions are perfectly elastic", "wrong": ["Real gas collisions are perfectly elastic; ideal gas collisions lose energy", "Both lose all their energy upon collision", "Neither type of gas ever collides"]},
+  {"q": "Under which two conditions do real gases behave most like ideal gases?", "correct": "High temperature and low pressure", "wrong": ["Low temperature and high pressure", "Low temperature and low pressure", "High temperature and high pressure"]},
+  {"q": "Why is a gas the most compressible state of matter?", "correct": "Its particles are far apart with large empty spaces between them", "wrong": ["Its particles are tightly packed with no space between them", "It has the strongest intermolecular forces", "Its particles have zero kinetic energy"]},
+  {"q": "Why can liquids flow while solids generally cannot?", "correct": "Liquid particles have weaker attractive forces and enough space to slide past one another", "wrong": ["Liquid particles have no intermolecular forces at all", "Solid particles have weaker forces than liquids", "Liquids have a fixed shape like solids"]},
+  {"q": "Why is it inaccurate to describe intermolecular forces as purely attractive?", "correct": "Because repulsion, which forces molecules apart, is also an intermolecular force", "wrong": ["Because intermolecular forces don't actually exist", "Because only intramolecular forces can repel", "Because attraction never occurs between molecules"]},
+  {"q": "If the pressure on a fixed mass of gas is doubled at constant temperature, what happens to its volume (Boyle's Law)?", "correct": "It is halved", "wrong": ["It doubles", "It stays the same", "It quadruples"]},
+  {"q": "If the absolute temperature of a fixed mass of gas is doubled at constant pressure, what happens to its volume (Charles' Law)?", "correct": "It doubles", "wrong": ["It is halved", "It stays the same", "It becomes zero"]},
+  {"q": "Which best explains why covalency is NOT established in intermolecular bonding, even though both bonding types involve electron orbital interactions?", "correct": "Intermolecular interactions occur between separate molecules without true electron sharing, unlike covalent bonds within a molecule", "wrong": ["Intermolecular forces do not involve electrons at all", "Intermolecular forces are stronger than covalent bonds", "There is no meaningful difference between the two"]},
+  {"q": "What determines whether two atoms in a Van der Waals interaction ultimately attract or repel one another?", "correct": "The distance between them", "wrong": ["Their color", "Their exact temperature only", "Whether they are radioactive"]},
+  {"q": "How should a hydrogen bond be classified relative to other intermolecular forces?", "correct": "As a comparatively strong, specific type of intermolecular force between H and a highly electronegative atom", "wrong": ["As a type of intramolecular covalent bond", "As identical in strength and type to a Van der Waals force", "As a purely repulsive force"]},
+  {"q": "Why does solving the ethyl nitrite spirit example require the combined gas law rather than Boyle's or Charles' Law alone?", "correct": "Because both pressure and temperature change simultaneously between the two states", "wrong": ["Because only volume changes", "Because the gas is not ideal", "Because no temperature is given"]},
+  {"q": "Why must gas volume be expressed in liters when using R = 0.08205 L·atm/mol·K?", "correct": "Because that value of R is defined specifically in liter-atmosphere units", "wrong": ["Because liters are the only valid volume unit in chemistry", "Because R has no defined units", "Because milliliters give a different physical answer"]},
+  {"q": "How does Kinetic Molecular Theory relate to Boyle's and Charles' Laws?", "correct": "Its postulates provide the physical explanation for the proportional relationships described in those laws", "wrong": ["It contradicts both laws", "It only applies to solids, not gases", "It replaces the need for those laws entirely"]},
+];
+
+const quizDataL3 = [
+  {"q": "A fixed mass of gas has volume V₁ at pressure P₁ and temperature T₁. If the pressure is tripled and the absolute temperature is doubled, the new volume is:", "correct": "(2/3)V₁", "wrong": ["(3/2)V₁", "6V₁", "V₁/6"]},
+  {"q": "A gas sample occupies 10 L at 2 atm and 300 K. What is its volume at 4 atm and 600 K?", "correct": "10 L (unchanged)", "wrong": ["20 L", "5 L", "40 L"]},
+  {"q": "0.50 g of an unknown vapor occupies 250 mL at 1 atm and 127°C. What is its approximate molecular weight?", "correct": "≈65.6 g/mol", "wrong": ["≈16.4 g/mol", "≈164 g/mol", "≈6.6 g/mol"]},
+  {"q": "Why does the ideal gas law increasingly fail to describe real gases at very high pressure?", "correct": "Particle volume becomes significant relative to container volume, and intermolecular attraction becomes non-negligible", "wrong": ["Gas molecules stop moving entirely", "Temperature always drops to absolute zero at high pressure", "The gas constant R changes value at high pressure"]},
+  {"q": "Why does the ideal gas law increasingly fail to describe real gases at very low temperature?", "correct": "Reduced kinetic energy allows intermolecular attractive forces to dominate, promoting condensation", "wrong": ["Pressure automatically becomes negative", "Gas molecules gain infinite kinetic energy", "Volume becomes undefined at low temperature"]},
+  {"q": "Given that R = 0.08205 L·atm/mol·K and R = 8.314 J/mol·K represent the same constant, approximately how many joules equal 1 L·atm?", "correct": "≈101.3 J", "wrong": ["≈8.314 J", "≈0.08205 J", "≈1000 J"]},
+  {"q": "The molecular weight formula M = gRT/PV is derived from PV = nRT by:", "correct": "Substituting n = g/M and rearranging algebraically", "wrong": ["Adding a new empirical constant not present in PV=nRT", "Assuming the gas behaves as a solid", "Measuring the gas's color spectrum"]},
+  {"q": "In the Victor Meyer method, why must both temperature and barometric pressure be recorded when the vapor volume is measured?", "correct": "Because gas volume depends on both T and P, which are needed to correctly convert volume into moles", "wrong": ["Because the liquid's color depends on temperature", "Because barometric pressure affects the liquid's mass", "Because temperature changes the identity of the compound"]},
+  {"q": "A solid has a high vapor pressure at room temperature. Which phase transition is it most likely to undergo upon slight heating, and why?", "correct": "Sublimation directly to gas, because its solid-to-gas transition already competes favorably at room conditions", "wrong": ["Melting to a liquid first, because all solids must melt before vaporizing", "Deposition, because that is the reverse of melting", "No phase transition is possible for such a solid"]},
+  {"q": "Why are hydrogen bonds generally stronger than typical Van der Waals forces?", "correct": "They involve a persistent large electrostatic field from a small hydrogen atom interacting with a genuinely electronegative atom, rather than a weak transient dipole", "wrong": ["Hydrogen bonds are actually weaker than Van der Waals forces", "Hydrogen bonds are a form of covalent bond, making them stronger by definition", "Van der Waals forces do not depend on distance at all"]},
+  {"q": "On the intermolecular energy vs. distance curve, what physically causes the sharp rise in energy at very short distances?", "correct": "Repulsion from overlapping electron clouds and nuclei at close range", "wrong": ["A sudden increase in temperature", "The formation of a new covalent bond", "Loss of all kinetic energy"]},
+  {"q": "Two different gas samples occupy the same volume at the same temperature and pressure. According to the ideal gas law, what can be concluded?", "correct": "They contain the same number of moles", "wrong": ["They must be the same gas", "They must have the same molecular weight", "They must have the same mass"]},
+  {"q": "Two identical containers hold different gases at the same T and P, but container A has twice the volume of container B. What does this imply?", "correct": "Container A holds twice as many moles of gas as container B", "wrong": ["Container A holds half as many moles as container B", "Both containers hold the same number of moles", "This is impossible under the ideal gas law"]},
+  {"q": "Why does an 'ideal gas,' by the assumptions of Kinetic Molecular Theory, theoretically never liquefy no matter how much it is cooled or compressed?", "correct": "Because it is assumed to have zero particle volume and zero intermolecular attraction, removing any mechanism for condensation", "wrong": ["Because ideal gases have infinite kinetic energy at all temperatures", "Because ideal gases are always at absolute zero", "Because liquefaction violates Boyle's Law"]},
+  {"q": "A covalent O–H bond within a single water molecule and a hydrogen bond between two water molecules differ in that:", "correct": "The O–H bond is intramolecular, while the hydrogen bond is intermolecular", "wrong": ["Both are intermolecular forces", "Both are intramolecular forces", "The hydrogen bond is stronger than the covalent O–H bond"]},
+  {"q": "Why does heating water eventually break enough hydrogen bonds to cause boiling?", "correct": "Added kinetic energy overcomes the attractive hydrogen-bond forces holding molecules together, loosening the liquid structure until vaporization occurs", "wrong": ["Heating strengthens hydrogen bonds until the liquid solidifies", "Heating has no effect on hydrogen bonds", "Hydrogen bonds only exist above the boiling point"]},
+  {"q": "Using the equilibrium distance (rₑ) concept, why don't attracted molecules simply collapse into one another?", "correct": "Short-range repulsion from overlapping electron clouds rises sharply below rₑ and pushes molecules back toward that equilibrium point", "wrong": ["Attraction stops existing below a certain distance", "Molecules have no repulsive forces at any distance", "Gravity prevents molecules from approaching further"]},
+  {"q": "A gas's pressure is measured in dynes/cm². Which value of the gas constant R must be used in PV=nRT for a dimensionally consistent result?", "correct": "8.314 J/mol·K", "wrong": ["0.08205 L·atm/mol·K", "273.15 J/mol·K", "760 J/mol·K"]},
+  {"q": "Why is 'high vapor pressure' the key property enabling sublimation?", "correct": "It reflects how readily solid particles escape directly into the gas phase, making the solid→gas route favorable before enough energy accumulates for melting", "wrong": ["High vapor pressure prevents any phase change from occurring", "High vapor pressure always corresponds to a very low melting point", "High vapor pressure means the solid has no intermolecular forces"]},
+  {"q": "Which pair of processes are described as reverses of one another, bypassing the liquid phase entirely?", "correct": "Sublimation and deposition", "wrong": ["Melting and freezing", "Boiling and condensation", "Cohesion and adhesion"]},
+  {"q": "If the volume and absolute temperature of a fixed mass of ideal gas are both increased by the same factor, what happens to its pressure?", "correct": "It stays constant", "wrong": ["It increases proportionally", "It decreases proportionally", "It becomes zero"]},
+  {"q": "Why do KMT postulates 1 (negligible volume) and 2 (no attraction) explicitly require low pressure, while postulates 3 (random motion) and 4 (elastic collisions) do not carry that qualifier?", "correct": "Postulates 1 and 2 are approximations that break down as pressure rises, while 3 and 4 are treated as fundamental assumptions of the kinetic model regardless of pressure", "wrong": ["All four postulates require low pressure equally", "Postulates 3 and 4 only apply at high pressure", "Postulates 1 and 2 are always exactly true at any pressure"]},
+  {"q": "Between a liquid held together mainly by hydrogen bonds and one held together mainly by weak Van der Waals forces (similar molecular weight), which would have the higher boiling point, and why?", "correct": "The hydrogen-bonded liquid, because hydrogen bonds are a stronger, more directional attraction than weak Van der Waals forces", "wrong": ["The Van der Waals liquid, because weak forces always raise boiling point", "Both would have identical boiling points regardless of the type of force", "Neither liquid could exist if intermolecular forces are present"]},
+  {"q": "What does the requirement that 'intermolecular forces must exist for molecules to exist as aggregates' imply about a hypothetical substance with zero intermolecular attraction?", "correct": "It could never condense into a liquid or solid — it would only ever exist as isolated, non-interacting gas particles", "wrong": ["It would immediately become a solid", "It would have an extremely high boiling point", "It would behave identically to a real liquid"]},
+  {"q": "Why does 'high temperature and low pressure' make both the Kinetic Molecular Theory's core assumptions AND the real-gas-to-ideal-gas convergence valid at the same time?", "correct": "Both stem from the same cause: particles far apart (low P) and moving fast (high T) make particle volume and intermolecular attraction negligible relative to container size and thermal energy", "wrong": ["They are unrelated coincidences with different physical causes", "High temperature and low pressure only affect KMT, not real gases", "Real gases only approach ideal behavior at low temperature and high pressure"]},
+  {"q": "In the combined gas law derivation, which two single-variable laws are algebraically merged to eliminate the need for two separate proportionality constants?", "correct": "Boyle's Law (P∝1/V at constant T) and Charles'/Gay-Lussac's Law (V∝T at constant P)", "wrong": ["Boyle's Law and the ideal gas law", "Charles' Law and Kinetic Molecular Theory", "The Victor Meyer method and Boyle's Law"]},
+  {"q": "A gas obeys Boyle's Law perfectly. If pressure is plotted against 1/volume, what shape of line results, and why?", "correct": "A straight line through the origin, because P = k×(1/V) is a direct proportionality", "wrong": ["A curve that approaches but never reaches the origin", "A horizontal line, since pressure is constant", "A vertical line, since volume is constant"]},
+  {"q": "If a gas obeyed Charles' Law perfectly down to absolute zero, what would its volume approach, and why does this not happen for real gases?", "correct": "Its volume would approach zero (V=kT), but real gases liquefy/solidify before reaching 0 K, making this an idealization", "wrong": ["Its volume would approach infinity, and this always happens in real gases", "Its volume would stay constant, matching real gas behavior exactly", "Its pressure, not volume, would approach zero"]},
+  {"q": "Why are the water properties 'high dielectric constant,' 'low vapor pressure,' and 'high boiling point' all listed together as consequences of the same phenomenon?", "correct": "All three arise from the strength of hydrogen bonding between water molecules", "wrong": ["They are unrelated properties that happen to occur together by coincidence", "They are all explained by covalent O–H bonds within single molecules only", "They result from water's molecular weight alone, unrelated to intermolecular forces"]},
+  {"q": "Why is 'the total volume of gas molecules is negligible' specifically tied to BOTH low pressure and high temperature, rather than low pressure alone?", "correct": "Because both conditions independently increase the average distance between molecules, making their own finite volume comparatively negligible", "wrong": ["High temperature has no effect on molecular spacing", "Only pressure affects molecular spacing; temperature is irrelevant", "High temperature actually decreases the distance between molecules"]},
+  {"q": "A fixed mass of gas occupies volume V at pressure P and temperature T. If pressure is halved and temperature is also halved, what happens to the volume?", "correct": "It stays the same, since P and T changed by the same proportional factor and cancel out in P₁V₁/T₁=P₂V₂/T₂", "wrong": ["It doubles", "It is halved", "It quadruples"]},
+  {"q": "Which best explains why the lecture states intermolecular bonding is 'governed by electron orbital interactions' yet 'covalency is not established' between molecules?", "correct": "Electron orbitals still influence the attraction between separate molecules, but no true electron-sharing bond (as in covalent intramolecular bonds) forms between them", "wrong": ["Electron orbitals play no role at all in intermolecular attraction", "Covalent bonds and intermolecular forces are exactly the same phenomenon", "Intermolecular forces involve full electron transfer between molecules"]},
+  {"q": "A gas sample's molecular weight is calculated using M = gRT/PV. If the measured mass g were mistakenly doubled (with all other values correct), how would the calculated M be affected?", "correct": "The calculated M would also double", "wrong": ["The calculated M would be halved", "The calculated M would be unaffected", "The calculated M would quadruple"]},
+  {"q": "If the measured pressure P were mistakenly recorded as half its true value in M = gRT/PV (all else correct), how would the calculated M be affected?", "correct": "The calculated M would double (since M is inversely proportional to P)", "wrong": ["The calculated M would be halved", "The calculated M would be unaffected", "The calculated M would quadruple"]},
+  {"q": "Why does the lecture's Kinetic Molecular Theory framework describe collisions as perfectly elastic, and what would happen to gas pressure over time if collisions instead lost energy?", "correct": "Perfect elasticity keeps average kinetic energy (and thus pressure) constant over time; energy-losing collisions would cause pressure to gradually decline as the gas 'settled'", "wrong": ["Elastic collisions cause gas pressure to increase indefinitely over time", "There is no relationship between collision elasticity and pressure", "Energy-losing collisions would cause the gas to instantly become a solid"]},
+  {"q": "Considering both Van der Waals forces and hydrogen bonds as subtypes of intermolecular force, which statement best relates them?", "correct": "Both arise from electrostatic/charge-based interactions between molecules, but hydrogen bonds are generally stronger and more specific than the weak, transient Van der Waals interactions", "wrong": ["They are unrelated categories with no shared physical basis", "Van der Waals forces are always stronger than hydrogen bonds", "Hydrogen bonds are a type of intramolecular, not intermolecular, force"]},
+  {"q": "Why would a real gas at very high pressure likely show a measured volume LARGER than the ideal gas law predicts, despite intermolecular attraction normally pulling molecules closer?", "correct": "At very high pressure, the finite volume occupied by the gas particles themselves becomes significant and resists further compression beyond what the ideal (point-particle) model predicts", "wrong": ["Real gas particles repel each other at all pressures with no attraction ever occurring", "The gas constant R decreases at high pressure, artificially inflating volume", "Temperature always drops sharply at high pressure, increasing volume"]},
+  {"q": "A substance has essentially zero intermolecular attraction between its particles at any condition. Based on the lecture's reasoning, what can be inferred about its ability to exist as a liquid or solid?", "correct": "It could not exist as a liquid or solid, since intermolecular forces are required for molecules to exist as aggregates", "wrong": ["It would exist only as a solid at room temperature", "It would have an unusually high boiling point", "It would behave identically to water"]},
+  {"q": "Why does converting both temperature to Kelvin and pressure to consistent units (e.g., atm) matter equally when applying the combined gas law across a temperature AND pressure change simultaneously (as in the ethyl nitrite spirit example)?", "correct": "Because the combined gas law's validity depends on both ratios (P and T) being on true proportional (absolute) scales; an error in either unit conversion would invalidate the whole calculation", "wrong": ["Only the temperature conversion matters; pressure units are always interchangeable without conversion", "Only the pressure conversion matters; temperature units are always interchangeable without conversion", "Neither conversion is actually necessary if the volume is the only unknown"]},
+  {"q": "Synthesizing Kinetic Molecular Theory with the real-vs-ideal gas comparison, which single condition best guarantees that a real gas will closely approximate ideal behavior?", "correct": "High temperature combined with low pressure", "wrong": ["Low temperature combined with high pressure", "High temperature combined with high pressure", "Low temperature combined with low pressure"]},
+];
+
+const quizLevels = {1:quizDataL1, 2:quizDataL2, 3:quizDataL3};
+let quizLevel = 1;
+let quizData = quizLevels[quizLevel];
+const quizLevelLabels = {1:'Level 1 · Easy', 2:'Level 2 · Medium', 3:'Level 3 · Hard'};
+const quizPanelSub = document.getElementById('quizPanelSub');
+
+let quizShuffled = [];
+let quizAnswered = [];
+let quizScoreVal = 0;
+
+function shuffleArr(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+function buildQuiz(){
+  quizScoreVal=0;
+  quizAnswered = new Array(quizData.length).fill(false);
+  quizShuffled = quizData.map(item=>{
+    const opts = shuffleArr([item.correct,...item.wrong]);
+    return {q:item.q, correct:item.correct, opts};
+  });
+  const listEl = document.getElementById('quizList');
+  listEl.innerHTML='';
+  quizShuffled.forEach((item,qi)=>{
+    const card=document.createElement('div');
+    card.className='q-card';
+    const head=document.createElement('div');
+    head.className='q-head';
+    head.innerHTML = `<div class="q-num">Q${qi+1}</div><div class="q-text">${item.q}</div>`;
+    card.appendChild(head);
+    const optsWrap=document.createElement('div');
+    optsWrap.className='q-opts';
+    item.opts.forEach(optText=>{
+      const opt=document.createElement('div');
+      opt.className='q-opt';
+      opt.innerHTML = `<span class="mark"></span><span>${optText}</span>`;
+      opt.addEventListener('click',()=>{
+        if(quizAnswered[qi]) return;
+        quizAnswered[qi]=true;
+        const isCorrect = optText===item.correct;
+        if(isCorrect) quizScoreVal++;
+        optsWrap.querySelectorAll('.q-opt').forEach(o=>{
+          o.classList.add('disabled');
+          const txt=o.querySelector('span:last-child').textContent;
+          if(txt===item.correct) o.classList.add('correct');
+        });
+        if(!isCorrect) opt.classList.add('wrong');
+        updateScore();
+      });
+      optsWrap.appendChild(opt);
+    });
+    card.appendChild(optsWrap);
+    listEl.appendChild(card);
+  });
+  updateScore();
+}
+
+function updateScore(){
+  const answeredCount = quizAnswered.filter(Boolean).length;
+  document.getElementById('quizScore').textContent = `Score: ${quizScoreVal} / ${answeredCount}`;
+}
+
+document.getElementById('quizRestart').addEventListener('click', buildQuiz);
+document.getElementById('quizFinish').addEventListener('click', ()=>{
+  const total = quizData.length;
+  const answered = quizAnswered.filter(Boolean).length;
+  alert(`You answered ${answered} of ${total} questions.\nFinal score: ${quizScoreVal} / ${answered}`);
+});
+document.querySelectorAll('#quizLevelTabs button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    quizLevel = parseInt(btn.dataset.level,10);
+    document.querySelectorAll('#quizLevelTabs button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    quizData = quizLevels[quizLevel];
+    quizPanelSub.textContent = `Pick a difficulty level. ${quizLevelLabels[quizLevel]} has ${quizData.length} questions. Answer choices are shuffled every time you load or restart.`;
+    buildQuiz();
+  });
+});
+
+buildQuiz();
+
+/* ============ TOPICS TAB ============ */
+const topicOutline = [
+  {h:'Matter', c:'solid', subs:[
+    {t:'What matter is', n:'Takes up space and can be weighed'},
+    {t:'The three basic states of matter', kids:['Solid','Liquid','Gas']},
+    {t:'Solid definition'},
+    {t:'Liquid definition'},
+    {t:'Gas definition'}
+  ]},
+  {h:'Binding forces between molecules', c:'imf', subs:[
+    {t:'Intermolecular forces'},
+    {t:'Intramolecular forces'},
+    {t:'Cohesion, adhesion and repulsion'},
+    {t:'Types of intermolecular forces', kids:['Van der Waals forces','Hydrogen bonds']}
+  ]},
+  {h:'States of matter', c:'liquid', subs:[
+    {t:'Solid → liquid → gas as energy is supplied'},
+    {t:'Sublimation and deposition'}
+  ]},
+  {h:'The gaseous state', c:'gas', subs:[
+    {t:'Important gas parameters', kids:['Pressure','Volume','Temperature (Kelvin scale)']},
+    {t:"Boyle's law"},
+    {t:'Law of Gay-Lussac and Charles'},
+    {t:'Combined gas law', n:'Worked example: effect of pressure changes on the volume of an ideal gas (ethyl nitrite spirit)'},
+    {t:'Ideal gas equation', n:'PV = nRT, values of R, worked example with 2 moles'},
+    {t:'Molecular weight from the gas law', n:'M = gRT/PV, worked example with ethyl alcohol'},
+    {t:'Victor Meyer method'}
+  ]},
+  {h:'Kinetic molecular theory', c:'laws', subs:[
+    {t:'The four postulates'},
+    {t:'Real gas vs ideal gas'}
+  ]}
+];
+
+const glossary = [
+  {t:'Matter', g:'Matter', k:'k-matter', d:'Anything that takes up space and can be weighed; it has volume and mass.'},
+  {t:'Solid', g:'Matter', k:'k-matter', d:'Particles are tightly packed and can only vibrate about a mean position. Fixed shape and volume, very low diffusion.'},
+  {t:'Liquid', g:'Matter', k:'k-matter', d:'Particles are less tightly packed than in solids. Fixed volume but no fixed shape; takes the shape of its container.'},
+  {t:'Gas', g:'Matter', k:'k-matter', d:'Particles are far apart with negligible attraction and move freely. Neither fixed volume nor fixed shape.'},
+  {t:'Intermolecular forces', g:'Binding forces', k:'', d:'The attractive and repulsive forces that arise between the molecules of a substance.'},
+  {t:'Intramolecular forces', g:'Binding forces', k:'', d:'The chemical bonds holding the atoms together in the molecules.'},
+  {t:'Aggregates', g:'Binding forces', k:'', d:'The groupings of molecules found in gases, liquids and solids; they can exist only because intermolecular forces exist.'},
+  {t:'Cohesion', g:'Binding forces', k:'', d:'The attraction of like molecules.'},
+  {t:'Adhesion', g:'Binding forces', k:'', d:'The attraction of unlike molecules.'},
+  {t:'Repulsion', g:'Binding forces', k:'', d:'A reaction between two molecules that forces them apart.'},
+  {t:'Van der Waals forces', g:'Binding forces', k:'', d:'Weak, nonionic intermolecular forces that involve charge–charge interactions and depend on the distance between atoms or molecules.'},
+  {t:'Hydrogen bond (hydrogen bridge)', g:'Binding forces', k:'', d:'An electrostatic union between a hydrogen atom and a strongly electronegative atom such as fluorine, oxygen or nitrogen. Found in ice and liquid water.'},
+  {t:'Sublimation', g:'Phase change', k:'k-phase', d:'A solid passing directly to the gaseous state without melting, e.g. iodine and camphor.'},
+  {t:'Deposition', g:'Phase change', k:'k-phase', d:'The reverse of sublimation: condensation directly to the solid state.'},
+  {t:'Pressure', g:'Gas laws', k:'k-gas', d:'Force per unit area exerted by a gas. Expressed in dynes/cm², atmospheres or mmHg (1 atm = 760 mmHg).'},
+  {t:'Volume', g:'Gas laws', k:'k-gas', d:'Usually expressed in liters or cubic centimeters (1 cm³ = 1 mL).'},
+  {t:'Temperature (Kelvin scale)', g:'Gas laws', k:'k-gas', d:'The absolute scale used in gas equations. 0 °C = 273.15 K.'},
+  {t:"Boyle's law", g:'Gas laws', k:'k-gas', d:'Relates the volume and pressure of a given mass of gas at constant temperature: P ∝ 1/V, or PV = k.'},
+  {t:'Law of Gay-Lussac and Charles', g:'Gas laws', k:'k-gas', d:'The volume and absolute temperature of a given mass of gas at constant pressure are directly proportional: V ∝ T, or V = kT.'},
+  {t:'Combined gas law', g:'Gas laws', k:'k-gas', d:'Boyle\'s and Charles\' laws combined: P₁V₁/T₁ = P₂V₂/T₂.'},
+  {t:'Ideal gas equation', g:'Gas laws', k:'k-gas', d:'PV = RT for 1 mole, or PV = nRT for n moles of an ideal gas.'},
+  {t:'R (gas constant)', g:'Gas laws', k:'k-gas', d:'The constant value of the PV/T ratio of an ideal gas: 0.08205 L·atm/mol·K with pressure in atm, or 8.314 J/mol·K.'},
+  {t:'Victor Meyer method', g:'Gas laws', k:'k-gas', d:'A way to find molecular weight: the liquid is weighed in a glass bulb, vaporized, and the volume is measured at a definite temperature and barometric pressure.'},
+  {t:'Kinetic molecular theory', g:'Kinetic theory', k:'k-kinetic', d:'The theory developed to explain the behavior of gases and to support the validity of the gas laws.'},
+  {t:'Ideal gas', g:'Kinetic theory', k:'k-kinetic', d:'Particles have no volume, collisions are elastic and there are no interactions between particles.'},
+  {t:'Real gas', g:'Kinetic theory', k:'k-kinetic', d:'Particles have volume, energy is lost in collisions and intermolecular forces act. Behaves like an ideal gas at high temperature and low pressure.'}
+];
+
+const topicOutlineEl = document.getElementById('topicOutline');
+topicOutline.forEach(m=>{
+  const d = document.createElement('details');
+  d.className = 'topic ' + m.c;
+  d.open = true;
+  let html = `<summary><span>${m.h}</span><span class="t-count">${m.subs.length} sub-headings</span></summary><ul class="sub-list">`;
+  m.subs.forEach(sub=>{
+    html += `<li><span class="s-title">${sub.t}</span>`;
+    if(sub.n) html += `<span class="s-note">${sub.n}</span>`;
+    if(sub.kids) html += `<ul class="kid-list">${sub.kids.map(k=>`<li>${k}</li>`).join('')}</ul>`;
+    html += '</li>';
+  });
+  html += '</ul>';
+  d.innerHTML = html;
+  topicOutlineEl.appendChild(d);
+});
+document.getElementById('topicExpand').addEventListener('click',()=>topicOutlineEl.querySelectorAll('details').forEach(d=>d.open=true));
+document.getElementById('topicCollapse').addEventListener('click',()=>topicOutlineEl.querySelectorAll('details').forEach(d=>d.open=false));
+
+const termGrid = document.getElementById('termGrid');
+const termSearch = document.getElementById('termSearch');
+const termCount = document.getElementById('termCount');
+function renderTerms(q){
+  const needle = (q||'').trim().toLowerCase();
+  const list = glossary.filter(x=>!needle || x.t.toLowerCase().includes(needle) || x.d.toLowerCase().includes(needle));
+  termGrid.innerHTML = list.length
+    ? list.map(x=>`<div class="term-card ${x.k}"><span class="grp">${x.g}</span><h4>${x.t}</h4><p>${x.d}</p></div>`).join('')
+    : '<p class="term-empty">No term matches that search. Try a shorter word.</p>';
+  termCount.textContent = `${list.length} of ${glossary.length} terms`;
+}
+termSearch.addEventListener('input',()=>renderTerms(termSearch.value));
+renderTerms('');
+</script>
+</body>
+</html>
